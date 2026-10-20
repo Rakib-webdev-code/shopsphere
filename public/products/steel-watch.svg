@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Minimal steel watch illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fafafa"/>
+      <stop offset="1" stop-color="#d1fae5"/>
+    </linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f4f5"/>
+      <stop offset="1" stop-color="#a1a1aa"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect x="365" y="70" width="70" height="150" rx="22" fill="url(#steel)"/>
+  <rect x="365" y="380" width="70" height="150" rx="22" fill="url(#steel)"/>
+  <circle cx="400" cy="300" r="140" fill="url(#steel)" stroke="#52525b" stroke-width="8"/>
+  <circle cx="400" cy="300" r="116" fill="#fafafa" stroke="#71717a" stroke-width="4"/>
+  <g stroke="#3f3f46" stroke-width="6" stroke-linecap="round">
+    <path d="M400 206v18M400 376v18M306 300h18M476 300h18"/>
+  </g>
+  <path d="M400 300V230M400 300l58 34" stroke="#0f766e" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="400" cy="300" r="9" fill="#0f766e"/>
+  <path d="M330 160c40 18 100 18 140 0M330 440c40-18 100-18 140 0" fill="none" stroke="#71717a" stroke-width="5" opacity=".5"/>
+</svg>

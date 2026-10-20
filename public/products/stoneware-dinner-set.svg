@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Stoneware Dinner Set illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffbeb"/>
+      <stop offset="1" stop-color="#fed7aa"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="664" cy="134" r="144" fill="#ffffff" opacity=".34"/>
+  <path d="M-40 500C150 430 320 560 520 490s250-40 330-90" fill="none" stroke="#ffffff" stroke-width="26" opacity=".22"/>
+  <g transform="translate(485 150) rotate(2) scale(4)" fill="none" stroke="#b45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+    <path d="M17 19h25v27a6 6 0 0 1-6 6H23a6 6 0 0 1-6-6V19Z" />
+    <path d="M42 25h5a7 7 0 0 1 0 14h-5" />
+    <path d="M24 11v4M33 8v7" />
+  </g>
+  <text x="70" y="88" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="3.5" fill="#b45309" opacity=".72">KITCHEN &amp; DINING</text>
+  <line x1="70" y1="345" x2="730" y2="345" stroke="#b45309" stroke-width="2" opacity=".22"/>
+  <text x="70" y="452" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#b45309">Stoneware Dinner</text>
+  <text x="70" y="502" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#b45309">Set</text>
+  <text x="70" y="562" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="2.5" fill="#b45309" opacity=".55">SHOPSPHERE SAMPLE COLLECTION</text>
+</svg>

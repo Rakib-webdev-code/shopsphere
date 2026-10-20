@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Woven cotton throw illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0fdfa"/>
+      <stop offset="1" stop-color="#cffafe"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <path d="M180 190h440v270H180z" fill="#f8fafc" stroke="#0f766e" stroke-width="8"/>
+  <g stroke="#5eead4" stroke-width="18">
+    <path d="M220 190v270M300 190v270M380 190v270M460 190v270M540 190v270"/>
+  </g>
+  <g stroke="#0f766e" stroke-width="8" opacity=".45">
+    <path d="M180 250h440M180 330h440M180 410h440"/>
+  </g>
+  <g stroke="#0f766e" stroke-width="7" stroke-linecap="round">
+    <path d="M200 460v54M230 460v54M260 460v54M290 460v54M320 460v54M350 460v54M380 460v54M410 460v54M440 460v54M470 460v54M500 460v54M530 460v54M560 460v54M590 460v54"/>
+  </g>
+  <rect x="380" y="190" width="80" height="270" fill="#14b8a6" opacity=".22"/>
+</svg>

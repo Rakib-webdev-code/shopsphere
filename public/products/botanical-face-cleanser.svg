@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Botanical Face Cleanser illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdf2f8"/>
+      <stop offset="1" stop-color="#fbcfe8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="645" cy="135" r="135" fill="#ffffff" opacity=".34"/>
+  <path d="M-40 500C150 430 320 560 520 490s250-40 330-90" fill="none" stroke="#ffffff" stroke-width="26" opacity=".22"/>
+  <g transform="translate(485 150) rotate(-7) scale(4)" fill="none" stroke="#be185d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+    <path d="M21 29h22l3 24H18l3-24Z" />
+    <path d="M27 29v-6a5 5 0 0 1 10 0v6" />
+    <path d="M31 16c0-4 4-5 4-8M39 15c0-3 3-4 3-6" />
+    <path d="M26 38h12" />
+  </g>
+  <text x="70" y="88" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="3.5" fill="#be185d" opacity=".72">BEAUTY &amp; PERSONAL CARE</text>
+  <line x1="70" y1="345" x2="730" y2="345" stroke="#be185d" stroke-width="2" opacity=".22"/>
+  <text x="70" y="452" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#be185d">Botanical Face</text>
+  <text x="70" y="502" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#be185d">Cleanser</text>
+  <text x="70" y="562" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="2.5" fill="#be185d" opacity=".55">SHOPSPHERE SAMPLE COLLECTION</text>
+</svg>

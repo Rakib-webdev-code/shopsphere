@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Summit water bottle illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecfeff"/>
+      <stop offset="1" stop-color="#a7f3d0"/>
+    </linearGradient>
+    <linearGradient id="bottle" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#115e59"/>
+      <stop offset=".5" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="380" cy="520" rx="150" ry="30" fill="#134e4a" opacity=".14"/>
+  <rect x="300" y="100" width="160" height="60" rx="20" fill="#134e4a"/>
+  <rect x="320" y="150" width="120" height="40" rx="14" fill="#0f766e"/>
+  <path d="M300 190h160l18 40v250c0 30-22 50-52 50h-92c-30 0-52-20-52-50V230l18-40Z" fill="url(#bottle)"/>
+  <path d="M300 260h160M300 340h160M300 420h160" stroke="#ccfbf1" stroke-width="10" opacity=".45"/>
+  <rect x="350" y="252" width="60" height="94" rx="30" fill="#ecfdf5" opacity=".8"/>
+  <path d="M370 278h20M380 268v20" stroke="#0f766e" stroke-width="6" stroke-linecap="round"/>
+</svg>

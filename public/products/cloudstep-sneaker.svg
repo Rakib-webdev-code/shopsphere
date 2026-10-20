@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Cloudstep sneakers illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7fee7"/>
+      <stop offset="1" stop-color="#99f6e4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="170" cy="160" r="110" fill="#ffffff" opacity=".4"/>
+  <path d="M180 390c40-40 96-52 150-42l84 16c40 8 72 34 88 72l16 36H180c-26 0-42-20-40-42 4-16 18-28 40-40Z" fill="#115e59"/>
+  <path d="M196 408c54-24 118-20 170 8l92 50H184c-20 0-30-20-18-36 8-10 18-16 30-22Z" fill="#5eead4"/>
+  <path d="M330 348l24-94c6-26 28-42 54-38l6 1c22 4 36 22 34 44l-5 98" fill="#0f766e"/>
+  <path d="M362 260l104 20M352 292l110 22M342 324l116 24" stroke="#ccfbf1" stroke-width="9" stroke-linecap="round" opacity=".8"/>
+  <rect x="180" y="470" width="376" height="22" rx="11" fill="#134e4a"/>
+  <path d="M196 508h330" stroke="#0f766e" stroke-width="8" stroke-linecap="round" opacity=".35"/>
+</svg>

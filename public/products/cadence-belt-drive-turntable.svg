@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Cadence Belt-Drive Turntable illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecfdf5"/>
+      <stop offset="1" stop-color="#99f6e4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="650" cy="120" r="140" fill="#ffffff" opacity=".34"/>
+  <path d="M-40 500C150 430 320 560 520 490s250-40 330-90" fill="none" stroke="#ffffff" stroke-width="26" opacity=".22"/>
+  <g transform="translate(485 150) rotate(-2) scale(4)" fill="none" stroke="#0f766e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+    <path d="M13 35v-3a19 19 0 0 1 38 0v3" />
+    <rect x="9" y="33" width="10" height="18" rx="5" />
+    <rect x="45" y="33" width="10" height="18" rx="5" />
+  </g>
+  <text x="70" y="88" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="3.5" fill="#0f766e" opacity=".72">AUDIO</text>
+  <line x1="70" y1="345" x2="730" y2="345" stroke="#0f766e" stroke-width="2" opacity=".22"/>
+  <text x="70" y="452" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#0f766e">Cadence Belt-Drive</text>
+  <text x="70" y="502" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#0f766e">Turntable</text>
+  <text x="70" y="562" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="2.5" fill="#0f766e" opacity=".55">SHOPSPHERE SAMPLE COLLECTION</text>
+</svg>

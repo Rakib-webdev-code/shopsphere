@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Tactile mechanical keyboard illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7fee7"/>
+      <stop offset="1" stop-color="#d1fae5"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect x="110" y="200" width="580" height="240" rx="34" fill="#27272a"/>
+  <rect x="136" y="226" width="528" height="188" rx="20" fill="#3f3f46"/>
+  <g fill="#e4e4e7">
+    <rect x="160" y="248" width="52" height="44" rx="8"/><rect x="224" y="248" width="52" height="44" rx="8"/><rect x="288" y="248" width="52" height="44" rx="8"/><rect x="352" y="248" width="52" height="44" rx="8"/><rect x="416" y="248" width="52" height="44" rx="8"/><rect x="480" y="248" width="52" height="44" rx="8"/><rect x="544" y="248" width="52" height="44" rx="8"/><rect x="608" y="248" width="32" height="44" rx="8"/>
+    <rect x="160" y="304" width="64" height="44" rx="8"/><rect x="236" y="304" width="52" height="44" rx="8"/><rect x="300" y="304" width="52" height="44" rx="8"/><rect x="364" y="304" width="52" height="44" rx="8"/><rect x="428" y="304" width="52" height="44" rx="8"/><rect x="492" y="304" width="52" height="44" rx="8"/><rect x="556" y="304" width="84" height="44" rx="8"/>
+    <rect x="160" y="360" width="88" height="34" rx="8"/><rect x="260" y="360" width="264" height="34" rx="8"/><rect x="536" y="360" width="56" height="34" rx="8"/><rect x="604" y="360" width="36" height="34" rx="8"/>
+  </g>
+  <rect x="224" y="248" width="52" height="44" rx="8" fill="#34d399"/>
+  <rect x="364" y="304" width="52" height="44" rx="8" fill="#34d399"/>
+</svg>

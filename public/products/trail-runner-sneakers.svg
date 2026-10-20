@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Trail Runner Sneakers illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5f5f4"/>
+      <stop offset="1" stop-color="#d6d3d1"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="654" cy="134" r="144" fill="#ffffff" opacity=".34"/>
+  <path d="M-40 500C150 430 320 560 520 490s250-40 330-90" fill="none" stroke="#ffffff" stroke-width="26" opacity=".22"/>
+  <g transform="translate(485 150) rotate(2) scale(4)" fill="none" stroke="#44403c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+    <path d="M12 40c8-2 13-6 18-14l4 4c3 5 8 7 16 8 3 0 5 2 5 5v4H12v-7Z" />
+    <path d="M12 45h43" />
+    <path d="m25 34 4 4M32 30l4 4" />
+  </g>
+  <text x="70" y="88" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="3.5" fill="#44403c" opacity=".72">FOOTWEAR</text>
+  <line x1="70" y1="345" x2="730" y2="345" stroke="#44403c" stroke-width="2" opacity=".22"/>
+  <text x="70" y="452" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#44403c">Trail Runner</text>
+  <text x="70" y="502" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#44403c">Sneakers</text>
+  <text x="70" y="562" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="2.5" fill="#44403c" opacity=".55">SHOPSPHERE SAMPLE COLLECTION</text>
+</svg>

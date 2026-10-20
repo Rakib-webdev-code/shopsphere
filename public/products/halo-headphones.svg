@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Halo wireless headphones illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecfdf5"/>
+      <stop offset="1" stop-color="#99f6e4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="650" cy="120" r="150" fill="#ffffff" opacity=".35"/>
+  <path d="M250 330v-55c0-88 67-155 150-155s150 67 150 155v55" fill="none" stroke="#0f766e" stroke-width="30" stroke-linecap="round"/>
+  <rect x="190" y="300" width="116" height="180" rx="48" fill="#134e4a"/>
+  <rect x="494" y="300" width="116" height="180" rx="48" fill="#134e4a"/>
+  <rect x="212" y="326" width="72" height="128" rx="32" fill="#2dd4bf"/>
+  <rect x="516" y="326" width="72" height="128" rx="32" fill="#2dd4bf"/>
+  <circle cx="274" cy="510" r="9" fill="#0f766e"/>
+  <path d="M310 514h180" stroke="#115e59" stroke-width="4" stroke-linecap="round" opacity=".35"/>
+</svg>

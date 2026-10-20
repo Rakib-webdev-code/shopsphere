@@ -1,26 +1,225 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * ShopSphere colour system
+ *
+ * Components use semantic utilities such as `bg-surface`, `text-muted`, and
+ * `border-border` instead of hard-coded zinc/white values. That keeps light and
+ * dark mode in one place and makes the visual language consistent.
+ */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #18181b;
+
+  --surface: #ffffff;
+  --surface-muted: #fafafa;
+  --surface-subtle: #f4f4f5;
+
+  --border: #e4e4e7;
+  --border-strong: #8b8b94;
+
+  --muted: #52525b;
+  --muted-strong: #3f3f46;
+  --muted-soft: #71717a;
+  --faint: #6b7280;
+
+  --strong: #18181b;
+  --strong-foreground: #ffffff;
+
+  --accent: #047857;
+  --accent-bright: #059669;
+  --accent-strong: #065f46;
+  --accent-soft: #ecfdf5;
+  --accent-border: #a7f3d0;
+  --accent-solid: #047857;
+  --accent-solid-hover: #065f46;
+
+  --danger: #b91c1c;
+  --danger-strong: #991b1b;
+  --danger-soft: #fef2f2;
+  --danger-border: #fecaca;
+
+  --warning: #b45309;
+  --warning-soft: #fffbeb;
+  --warning-border: #fde68a;
+
+  --info: #0369a1;
+  --info-soft: #f0f9ff;
+  --info-border: #bae6fd;
+
+  --shipped: #3730a3;
+  --shipped-soft: #eef2ff;
+  --shipped-border: #c7d2fe;
+}
+
+html[data-theme="dark"] {
+  --background: #09090b;
+  --foreground: #fafafa;
+
+  --surface: #111113;
+  --surface-muted: #18181b;
+  --surface-subtle: #27272a;
+
+  --border: #27272a;
+  --border-strong: #71717a;
+
+  --muted: #a1a1aa;
+  --muted-strong: #d4d4d8;
+  --muted-soft: #a1a1aa;
+  --faint: #9ca3af;
+
+  --strong: #f4f4f5;
+  --strong-foreground: #18181b;
+
+  --accent: #6ee7b7;
+  --accent-bright: #34d399;
+  --accent-strong: #a7f3d0;
+  --accent-soft: #022c22;
+  --accent-border: #065f46;
+  --accent-solid: #047857;
+  --accent-solid-hover: #059669;
+
+  --danger: #fca5a5;
+  --danger-strong: #fecaca;
+  --danger-soft: #450a0a;
+  --danger-border: #7f1d1d;
+
+  --warning: #fcd34d;
+  --warning-soft: #451a03;
+  --warning-border: #78350f;
+
+  --info: #7dd3fc;
+  --info-soft: #082f49;
+  --info-border: #0c4a6e;
+
+  --shipped: #c7d2fe;
+  --shipped-soft: #1e1b4b;
+  --shipped-border: #3730a3;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-subtle: var(--surface-subtle);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-muted: var(--muted);
+  --color-muted-strong: var(--muted-strong);
+  --color-muted-soft: var(--muted-soft);
+  --color-faint: var(--faint);
+
+  --color-strong: var(--strong);
+  --color-strong-foreground: var(--strong-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-border: var(--accent-border);
+  --color-accent-solid: var(--accent-solid);
+  --color-accent-solid-hover: var(--accent-solid-hover);
+
+  --color-danger: var(--danger);
+  --color-danger-strong: var(--danger-strong);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-border: var(--danger-border);
+
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-border: var(--warning-border);
+
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-info-border: var(--info-border);
+
+  --color-shipped: var(--shipped);
+  --color-shipped-soft: var(--shipped-soft);
+  --color-shipped-border: var(--shipped-border);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--background);
+  }
+
+  html[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+    text-rendering: optimizeLegibility;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+  }
+
+  /*
+   * A sensible fallback for links and controls that do not define their own
+   * focus ring. Tailwind utilities such as `focus-visible:ring-2` and
+   * `focus-visible:outline-none` take precedence.
+   */
+  :where(a, button, input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+ * Keep keyboard focus offsets aligned with the active theme unless a component
+ * deliberately sets a different offset colour (for example on a dark panel).
+ */
+html[data-theme="dark"] :where(a, button, input, select, textarea, summary) {
+  --tw-ring-offset-color: var(--background);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    transition: none;
+  }
 }

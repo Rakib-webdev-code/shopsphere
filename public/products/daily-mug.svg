@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Daily ceramic mug illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fafafa"/>
+      <stop offset="1" stop-color="#d9f99d"/>
+    </linearGradient>
+    <linearGradient id="cup" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#d4d4d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="380" cy="490" rx="210" ry="42" fill="#365314" opacity=".12"/>
+  <path d="M270 220h240v190c0 50-40 90-90 90h-60c-50 0-90-40-90-90V220Z" fill="url(#cup)" stroke="#52525b" stroke-width="8"/>
+  <path d="M510 280h42c42 0 72 32 72 72s-30 72-72 72h-42" fill="none" stroke="#52525b" stroke-width="24"/>
+  <ellipse cx="390" cy="220" rx="120" ry="34" fill="#ecfccb" stroke="#52525b" stroke-width="8"/>
+  <ellipse cx="390" cy="220" rx="88" ry="20" fill="#78716c" opacity=".55"/>
+  <path d="M330 130c-20 28 20 40 0 68M400 112c-20 28 20 40 0 68M470 130c-20 28 20 40 0 68" fill="none" stroke="#a3a3a3" stroke-width="8" stroke-linecap="round"/>
+</svg>
