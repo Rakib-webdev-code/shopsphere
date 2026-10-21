@@ -3,6 +3,7 @@ import { connection } from "next/server";
 import Link from "next/link";
 import { Suspense } from "react";
 import { AdminProductForm } from "@/components/admin-product-form";
+import { requireAdminPage } from "@/lib/auth/session";
 import { listCategories } from "@/lib/services/categories";
 
 export const metadata: Metadata = { title: "New product" };
@@ -17,6 +18,7 @@ export default function NewProductPage() {
 
 async function NewProductContent() {
   await connection();
+  await requireAdminPage();
   const categories = await listCategories({ includeInactive: true });
 
   return (

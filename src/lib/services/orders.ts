@@ -19,6 +19,7 @@ import type {
   ShippingAddressDoc,
 } from "@/lib/db/types";
 import {
+  ApiError,
   conflict,
   forbidden,
   notFound,
@@ -56,6 +57,53 @@ function findOrderByCheckoutKey(userId: string, checkoutKey: string) {
 
 function isDuplicateKeyError(error: unknown) {
   return error instanceof MongoServerError && error.code === 11000;
+}
+
+const CHECKOUT_KEY_INDEX_NAME = "orders_user_checkout_key_uidx";
+/**
+ * Restored-order markers are appended to product and coupon documents in the
+ * same atomic update as the stock/counter change. The cap keeps documents
+ * bounded; recovery normally completes immediately, long before a marker can
+ * be evicted.
+ */
+const RESTORATION_MARKER_LIMIT = 1_000;
+
+/**
+ * Without this partial unique index two concurrent requests carrying the same
+ * checkout key can both insert an order. Refusing to start a keyed checkout is
+ * safer than silently charging stock twice.
+ */
+async function assertCheckoutIdempotencyIndex() {
+  let indexes;
+
+  try {
+    indexes = await ordersCollection.listIndexes().toArray();
+  } catch (error) {
+    if (error instanceof MongoServerError && error.code === 26) {
+      indexes = [];
+    } else {
+      throw error;
+    }
+  }
+
+  const index = indexes.find((entry) => entry.name === CHECKOUT_KEY_INDEX_NAME);
+  const key = index?.key as Record<string, unknown> | undefined;
+  const partial = index?.partialFilterExpression as
+    | { checkoutKey?: { $type?: string } }
+    | undefined;
+  const ready =
+    index?.unique === true &&
+    key?.userId === 1 &&
+    key?.checkoutKey === 1 &&
+    partial?.checkoutKey?.$type === "string";
+
+  if (!ready) {
+    throw new ApiError(
+      503,
+      "Checkout is temporarily unavailable because the order idempotency index is missing. Run `npm run db:init` and try again.",
+      "CHECKOUT_NOT_READY",
+    );
+  }
 }
 
 function serializeOrder(order: OrderDoc): Order {
@@ -308,6 +356,10 @@ export async function createOrder(
     if (existing) {
       return serializeOrder(existing);
     }
+
+    // Fail before any stock or coupon mutation if duplicate-key protection is
+    // not available.
+    await assertCheckoutIdempotencyIndex();
   }
 
   const shippingAddress = await resolveShippingAddress(user.id, body);
@@ -364,7 +416,13 @@ export async function createOrder(
   };
 
   if (!(await supportsTransactions())) {
-    return createOrderWithCompensation(user, order, lines, subtotalCents, couponPreview);
+    return createOrderWithCompensation(
+      user,
+      order,
+      lines,
+      subtotalCents,
+      couponPreview,
+    );
   }
 
   try {
@@ -432,7 +490,11 @@ async function createOrderWithCompensation(
 
     await ordersCollection.insertOne(order);
   } catch (error) {
-    await releaseReservations(stockReservations, couponReserved ? order.couponId : null);
+    await releaseReservations(
+      order._id,
+      stockReservations,
+      couponReserved ? order.couponId : null,
+    );
 
     if (order.checkoutKey && isDuplicateKeyError(error)) {
       const existing = await findOrderByCheckoutKey(
@@ -461,16 +523,67 @@ async function createOrderWithCompensation(
   return serializeOrder(order);
 }
 
+async function restoreProductStock(
+  orderId: ObjectId,
+  productId: ObjectId,
+  quantity: number,
+  session?: ClientSession,
+) {
+  const at = new Date();
+
+  // The `$ne` filter and the `$inc`/`$push` land in one document update, so a
+  // retry either applies both the marker and the increment or neither.
+  await productsCollection.updateOne(
+    { _id: productId, "inventoryRestorations.orderId": { $ne: orderId } },
+    {
+      $inc: { stock: quantity },
+      $push: {
+        inventoryRestorations: {
+          $each: [{ orderId, at }],
+          $slice: -RESTORATION_MARKER_LIMIT,
+        },
+      },
+      $set: { updatedAt: at },
+    },
+    { session },
+  );
+}
+
+async function restoreCouponUse(
+  orderId: ObjectId,
+  couponId: ObjectId,
+  session?: ClientSession,
+) {
+  const at = new Date();
+
+  await couponsCollection.updateOne(
+    {
+      _id: couponId,
+      usedCount: { $gt: 0 },
+      "couponRestorations.orderId": { $ne: orderId },
+    },
+    {
+      $inc: { usedCount: -1 },
+      $push: {
+        couponRestorations: {
+          $each: [{ orderId, at }],
+          $slice: -RESTORATION_MARKER_LIMIT,
+        },
+      },
+      $set: { updatedAt: at },
+    },
+    { session },
+  );
+}
+
 async function releaseReservations(
+  orderId: ObjectId,
   lines: CheckoutLine[],
   couponId: ObjectId | null,
 ) {
   for (const line of lines) {
     try {
-      await productsCollection.updateOne(
-        { _id: line.product._id },
-        { $inc: { stock: line.quantity }, $set: { updatedAt: new Date() } },
-      );
+      await restoreProductStock(orderId, line.product._id, line.quantity);
     } catch (error) {
       console.error("[orders] Failed to restore stock after checkout error:", error);
     }
@@ -478,14 +591,91 @@ async function releaseReservations(
 
   if (couponId) {
     try {
-      await couponsCollection.updateOne(
-        { _id: couponId, usedCount: { $gt: 0 } },
-        { $inc: { usedCount: -1 } },
-      );
+      await restoreCouponUse(orderId, couponId);
     } catch (error) {
       console.error("[orders] Failed to restore coupon usage:", error);
     }
   }
+}
+
+/**
+ * Restores every reservation for a cancelled order, then marks the order as
+ * released. Safe to call repeatedly and from concurrent recovery workers.
+ */
+async function finishInventoryRelease(
+  order: OrderDoc,
+  session?: ClientSession,
+): Promise<OrderDoc> {
+  for (const item of order.items) {
+    await restoreProductStock(
+      order._id,
+      item.productId,
+      item.quantity,
+      session,
+    );
+  }
+
+  if (order.couponId) {
+    await restoreCouponUse(order._id, order.couponId, session);
+  }
+
+  const released = await ordersCollection.findOneAndUpdate(
+    {
+      _id: order._id,
+      status: "cancelled",
+      inventoryState: "releasing",
+    },
+    { $set: { inventoryState: "released", updatedAt: new Date() } },
+    { session, returnDocument: "after" },
+  );
+
+  if (released) {
+    return released;
+  }
+
+  const current = await ordersCollection.findOne(
+    { _id: order._id },
+    { session },
+  );
+
+  if (current?.inventoryState === "released") {
+    return current;
+  }
+
+  throw conflict(
+    "This order's inventory release is incomplete. Retry the cancellation to finish it.",
+  );
+}
+
+/**
+ * Resumes cancellations that were claimed but could not finish restoring
+ * inventory (for example after a process crash on a standalone MongoDB).
+ * Each product/coupon restoration is idempotent, so parallel recovery is safe.
+ */
+export async function recoverPendingInventoryReleases(limit = 10) {
+  const safeLimit = Math.min(50, Math.max(1, Math.trunc(limit)));
+  const pending = await ordersCollection
+    .find({ status: "cancelled", inventoryState: "releasing" })
+    .sort({ updatedAt: 1 })
+    .limit(safeLimit)
+    .toArray();
+  const failed: string[] = [];
+  let released = 0;
+
+  for (const order of pending) {
+    try {
+      await finishInventoryRelease(order);
+      released += 1;
+    } catch (error) {
+      failed.push(order._id.toHexString());
+      console.error(
+        `[orders] Failed to recover inventory release for order ${order._id.toHexString()}:`,
+        error,
+      );
+    }
+  }
+
+  return { scanned: pending.length, released, failed };
 }
 
 export async function listOrdersForUser(userId: string) {
@@ -601,6 +791,12 @@ export async function updateOrderStatus(
   }
 
   if (existing.status === nextStatus) {
+    // A previous cancellation may have claimed the order and then failed
+    // before restoring inventory. Retrying the same request resumes it.
+    if (nextStatus === "cancelled" && existing.inventoryState === "releasing") {
+      return serializeOrder(await finishInventoryRelease(existing));
+    }
+
     return serializeOrder(existing);
   }
 
@@ -648,8 +844,13 @@ async function cancelOrder(
   order: OrderDoc,
   adminUserId: string | null,
 ): Promise<Order> {
+  // Repeated cancellation is idempotent.
   if (order.inventoryState === "released") {
-    throw conflict("This order's inventory has already been released.");
+    return serializeOrder(order);
+  }
+
+  if (order.inventoryState === "releasing") {
+    return serializeOrder(await finishInventoryRelease(order));
   }
 
   const updatedAt = new Date();
@@ -661,50 +862,56 @@ async function cancelOrder(
   const cancellationUpdate = {
     $set: {
       status: "cancelled" as const,
-      inventoryState: "released" as const,
+      inventoryState: "releasing" as const,
       updatedAt,
     },
     $push: { statusHistory: event },
   };
   const releasedMessage =
-    "This order's inventory has already been released or is being updated. Refresh and try again.";
+    "This order changed or its inventory was already released. Refresh and try again.";
 
   if (!(await supportsTransactions())) {
-    // Claim the release first. Only one concurrent request can match
-    // `inventoryState: "reserved"`, so stock cannot be restored twice.
+    // Claim first, then release. Only one concurrent request can match
+    // `inventoryState: "reserved"` and the status it validated. The claim
+    // records `releasing` so a crash mid-release can be resumed without
+    // incrementing stock twice (each item carries an idempotency marker).
     const claimed = await ordersCollection.findOneAndUpdate(
-      { _id: order._id, inventoryState: "reserved" },
+      {
+        _id: order._id,
+        status: order.status,
+        inventoryState: "reserved",
+      },
       cancellationUpdate,
       { returnDocument: "after" },
     );
 
     if (!claimed) {
+      const current = await ordersCollection.findOne({ _id: order._id });
+
+      if (!current) {
+        throw notFound("Order not found.");
+      }
+
+      // Another request claimed the cancellation. Finish or report it rather
+      // than asking the admin to retry a release that may already be running.
+      if (
+        current.status === "cancelled" &&
+        current.inventoryState === "releasing"
+      ) {
+        return serializeOrder(await finishInventoryRelease(current));
+      }
+
+      if (
+        current.status === "cancelled" &&
+        current.inventoryState === "released"
+      ) {
+        return serializeOrder(current);
+      }
+
       throw conflict(releasedMessage);
     }
 
-    for (const item of claimed.items) {
-      try {
-        await productsCollection.updateOne(
-          { _id: item.productId },
-          { $inc: { stock: item.quantity }, $set: { updatedAt: new Date() } },
-        );
-      } catch (error) {
-        console.error("[orders] Failed to restore stock after cancellation:", error);
-      }
-    }
-
-    if (claimed.couponId) {
-      try {
-        await couponsCollection.updateOne(
-          { _id: claimed.couponId, usedCount: { $gt: 0 } },
-          { $inc: { usedCount: -1 } },
-        );
-      } catch (error) {
-        console.error("[orders] Failed to restore coupon usage:", error);
-      }
-    }
-
-    return serializeOrder(claimed);
+    return serializeOrder(await finishInventoryRelease(claimed));
   }
 
   return runOptionalTransaction(async (session) => {
@@ -718,11 +925,23 @@ async function cancelOrder(
     }
 
     if (current.inventoryState === "released") {
-      throw conflict("This order's inventory has already been released.");
+      return serializeOrder(current);
+    }
+
+    if (current.inventoryState === "releasing") {
+      return serializeOrder(await finishInventoryRelease(current, session));
+    }
+
+    if (!ORDER_STATUS_TRANSITIONS[current.status].includes("cancelled")) {
+      throw conflict("This order can no longer be cancelled.");
     }
 
     const claimed = await ordersCollection.findOneAndUpdate(
-      { _id: current._id, inventoryState: "reserved" },
+      {
+        _id: current._id,
+        status: current.status,
+        inventoryState: "reserved",
+      },
       cancellationUpdate,
       { session, returnDocument: "after" },
     );
@@ -731,23 +950,7 @@ async function cancelOrder(
       throw conflict(releasedMessage);
     }
 
-    for (const item of claimed.items) {
-      await productsCollection.updateOne(
-        { _id: item.productId },
-        { $inc: { stock: item.quantity }, $set: { updatedAt: new Date() } },
-        { session },
-      );
-    }
-
-    if (claimed.couponId) {
-      await couponsCollection.updateOne(
-        { _id: claimed.couponId, usedCount: { $gt: 0 } },
-        { $inc: { usedCount: -1 } },
-        { session },
-      );
-    }
-
-    return serializeOrder(claimed);
+    return serializeOrder(await finishInventoryRelease(claimed, session));
   });
 }
 

@@ -3,6 +3,7 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import { AdminCategoryManager } from "@/components/admin-category-manager";
 import { Alert } from "@/components/ui";
+import { requireAdminPage } from "@/lib/auth/session";
 import { listCategories } from "@/lib/services/categories";
 
 export const metadata: Metadata = { title: "Categories" };
@@ -17,6 +18,7 @@ export default function AdminCategoriesPage() {
 
 async function CategoriesContent() {
   await connection();
+  await requireAdminPage();
   let categories;
 
   try {

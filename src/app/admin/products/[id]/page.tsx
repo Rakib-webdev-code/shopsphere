@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { AdminProductForm } from "@/components/admin-product-form";
+import { requireAdminPage } from "@/lib/auth/session";
 import { listCategories } from "@/lib/services/categories";
 import { getProductById } from "@/lib/services/products";
 
@@ -23,6 +24,7 @@ async function EditProductContent({
   params,
 }: Pick<EditProductPageProps, "params">) {
   await connection();
+  await requireAdminPage();
   const { id } = await params;
   const [product, categories] = await Promise.all([
     getProductById(id, { includeInactive: true }),

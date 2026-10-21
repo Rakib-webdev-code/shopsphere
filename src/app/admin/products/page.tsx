@@ -4,6 +4,7 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import { ProductMedia } from "@/components/product-media";
 import { Alert, Pagination, inputClass, primaryButtonClass } from "@/components/ui";
+import { requireAdminPage } from "@/lib/auth/session";
 import { ADMIN_PRODUCTS_PER_PAGE, SORT_OPTIONS } from "@/lib/constants";
 import { ApiError } from "@/lib/errors";
 import { formatPrice } from "@/lib/format";
@@ -32,6 +33,7 @@ async function ProductsContent({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   await connection();
+  await requireAdminPage();
   const params = await searchParams;
   const q = firstValue(params.q) ?? "";
   const category = firstValue(params.category) ?? "";

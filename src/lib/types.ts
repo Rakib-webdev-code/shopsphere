@@ -220,7 +220,7 @@ export type Order = {
   couponCode: string | null;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
-  inventoryState: "reserved" | "released";
+  inventoryState: "reserved" | "releasing" | "released";
   statusHistory: OrderStatusEvent[];
   createdAt: string;
   updatedAt: string;

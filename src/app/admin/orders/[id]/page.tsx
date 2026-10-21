@@ -4,8 +4,11 @@ import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { AdminOrderStatusForm } from "@/components/admin-order-status-form";
+import { OrderStatusTimeline } from "@/components/order-status-timeline";
 import { MediaThumb } from "@/components/product-media";
-import { OrderStatusBadge } from "@/components/ui";
+import { Alert, OrderStatusBadge } from "@/components/ui";
+import { requireAdminPage } from "@/lib/auth/session";
+import { ApiError } from "@/lib/errors";
 import { formatPrice } from "@/lib/format";
 import { getOrderForAdmin } from "@/lib/services/orders";
 
@@ -25,14 +28,23 @@ async function AdminOrderContent({
   params,
 }: Pick<AdminOrderPageProps, "params">) {
   await connection();
+  await requireAdminPage();
   const { id } = await params;
 
   let order;
 
   try {
     order = await getOrderForAdmin(id);
-  } catch {
-    notFound();
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      notFound();
+    }
+
+    return (
+      <Alert tone="error">
+        Order details could not be loaded. Please try again in a moment.
+      </Alert>
+    );
   }
 
   return (
@@ -141,6 +153,17 @@ async function AdminOrderContent({
             <div className="mt-4">
               <AdminOrderStatusForm order={order} />
             </div>
+          </section>
+
+          <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
+            <h3 className="text-lg font-semibold text-foreground">
+              Status history
+            </h3>
+            <OrderStatusTimeline
+              history={order.statusHistory}
+              createdAt={order.createdAt}
+              currentStatus={order.status}
+            />
           </section>
 
           <section className="rounded-2xl border border-border bg-surface-muted p-5 sm:p-6">

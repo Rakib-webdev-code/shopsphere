@@ -4,7 +4,12 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import { InventoryManager } from "@/components/inventory-manager";
 import { Alert, inputClass } from "@/components/ui";
-import { listInventory } from "@/lib/services/admin";
+import { requireAdminPage } from "@/lib/auth/session";
+import { LOW_STOCK_THRESHOLD } from "@/lib/constants";
+import {
+  countLowStockProducts,
+  listInventory,
+} from "@/lib/services/admin";
 
 export const metadata: Metadata = { title: "Inventory" };
 
@@ -28,19 +33,22 @@ async function InventoryContent({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   await connection();
+  await requireAdminPage();
   const params = await searchParams;
   const q = firstValue(params.q) ?? "";
   const lowStock = firstValue(params.low) === "1";
 
   let products;
+  let lowStockCounts;
 
   try {
-    products = await listInventory({ query: q, lowStock });
+    [products, lowStockCounts] = await Promise.all([
+      listInventory({ query: q, lowStock }),
+      countLowStockProducts(),
+    ]);
   } catch {
     return <Alert tone="error">Inventory could not be loaded.</Alert>;
   }
-
-  const lowStockCount = products.filter((product) => product.stock <= 5).length;
 
   return (
     <div>
@@ -54,8 +62,15 @@ async function InventoryContent({
             database update, so concurrent orders cannot oversell.
           </p>
         </div>
-        <div className="rounded-2xl border border-warning-border bg-warning-soft px-4 py-3 text-sm font-semibold text-warning">
-          {lowStockCount} low-stock {lowStockCount === 1 ? "product" : "products"}
+        <div className="rounded-2xl border border-warning-border bg-warning-soft px-4 py-3 text-sm text-warning">
+          <p className="font-semibold">
+            {lowStockCounts.total} active low-stock{" "}
+            {lowStockCounts.total === 1 ? "product" : "products"} ·{" "}
+            {lowStockCounts.outOfStock} out of stock
+          </p>
+          <p className="mt-0.5 text-xs">
+            Threshold: {lowStockCounts.threshold} or fewer
+          </p>
         </div>
       </div>
 
@@ -84,7 +99,7 @@ async function InventoryContent({
             defaultChecked={lowStock}
             className="h-4 w-4 rounded border-border-strong text-accent-bright focus:ring-accent"
           />
-          Low stock only (5 or fewer)
+          Low stock only ({LOW_STOCK_THRESHOLD} or fewer)
         </label>
         <button
           type="submit"

@@ -6,11 +6,24 @@ import {
   usersCollection,
 } from "@/lib/db/collections";
 import type { ProductDoc } from "@/lib/db/types";
-import type { AdminStats, CustomerSummary, Product } from "@/lib/types";
+import type {
+  AdminStats,
+  CustomerSummary,
+  LowStockOverview,
+  Product,
+} from "@/lib/types";
 import { serializeProducts } from "@/lib/services/products";
+import { recoverPendingInventoryReleases } from "@/lib/services/orders";
 import { escapeRegex } from "@/lib/validation";
+import { LOW_STOCK_THRESHOLD } from "@/lib/constants";
 
 export async function getAdminStats(): Promise<AdminStats> {
+  // Opportunistic, idempotent repair for cancellations that were claimed but
+  // crashed before restoring inventory. Runs before the stock counts are read.
+  await recoverPendingInventoryReleases(5).catch((error: unknown) => {
+    console.error("[admin] Inventory recovery check failed:", error);
+  });
+
   const [
     activeProducts,
     inactiveProducts,
@@ -26,7 +39,10 @@ export async function getAdminStats(): Promise<AdminStats> {
     productsCollection.countDocuments({ active: true }),
     productsCollection.countDocuments({ active: false }),
     categoriesCollection.countDocuments({ active: true }),
-    productsCollection.countDocuments({ active: true, stock: { $lte: 5 } }),
+    productsCollection.countDocuments({
+      active: true,
+      stock: { $lte: LOW_STOCK_THRESHOLD },
+    }),
     ordersCollection.countDocuments({}),
     ordersCollection.countDocuments({
       status: { $in: ["pending", "confirmed", "processing"] },
@@ -81,7 +97,7 @@ export async function listInventory(options: {
   }
 
   if (options.lowStock) {
-    filter.stock = { $lte: 5 };
+    filter.stock = { $lte: LOW_STOCK_THRESHOLD };
   }
 
   const products = await productsCollection
@@ -91,6 +107,52 @@ export async function listInventory(options: {
     .toArray();
 
   return serializeProducts(products);
+}
+
+export async function countLowStockProducts() {
+  const filter: Filter<ProductDoc> = {
+    active: true,
+    stock: { $lte: LOW_STOCK_THRESHOLD },
+  };
+  const [total, outOfStock] = await Promise.all([
+    productsCollection.countDocuments(filter),
+    productsCollection.countDocuments({ active: true, stock: 0 }),
+  ]);
+
+  return {
+    threshold: LOW_STOCK_THRESHOLD,
+    total,
+    outOfStock,
+  };
+}
+
+export async function listLowStockAlerts(limit = 8): Promise<LowStockOverview> {
+  const safeLimit = Math.min(50, Math.max(1, Math.trunc(limit)));
+  const filter: Filter<ProductDoc> = {
+    active: true,
+    stock: { $lte: LOW_STOCK_THRESHOLD },
+  };
+  const [products, counts] = await Promise.all([
+    productsCollection
+      .find(filter, {
+        projection: { name: 1, sku: 1, stock: 1, active: 1 },
+      })
+      .sort({ stock: 1, name: 1 })
+      .limit(safeLimit)
+      .toArray(),
+    countLowStockProducts(),
+  ]);
+
+  return {
+    ...counts,
+    items: products.map((product) => ({
+      id: product._id.toHexString(),
+      name: product.name,
+      sku: product.sku,
+      stock: product.stock,
+      active: Boolean(product.active),
+    })),
+  };
 }
 
 export async function listCustomerSummaries(): Promise<CustomerSummary[]> {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { Alert, OrderStatusBadge, Pagination, inputClass } from "@/components/ui";
+import { requireAdminPage } from "@/lib/auth/session";
 import { ADMIN_ORDERS_PER_PAGE, ORDER_STATUSES } from "@/lib/constants";
 import { formatPrice } from "@/lib/format";
 import { listOrdersForAdmin } from "@/lib/services/orders";
@@ -29,6 +30,7 @@ async function OrdersContent({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   await connection();
+  await requireAdminPage();
   const params = await searchParams;
   const status = firstValue(params.status) ?? "";
   const query = firstValue(params.q) ?? "";

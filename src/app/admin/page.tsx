@@ -8,7 +8,13 @@ import {
   SparklesIcon,
   UserIcon,
 } from "@/components/icons";
+import {
+  LowStockAlerts,
+  LowStockAlertsSkeleton,
+} from "@/components/low-stock-alerts";
 import { OrderStatusBadge } from "@/components/ui";
+import { requireAdminPage } from "@/lib/auth/session";
+import { LOW_STOCK_THRESHOLD } from "@/lib/constants";
 import { formatPrice } from "@/lib/format";
 import { getAdminStats } from "@/lib/services/admin";
 
@@ -24,6 +30,7 @@ export default function AdminDashboardPage() {
 
 async function DashboardContent() {
   await connection();
+  await requireAdminPage();
   const stats = await getAdminStats();
 
   return (
@@ -45,10 +52,16 @@ async function DashboardContent() {
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat label="Low stock" value={String(stats.lowStockProducts)} detail="Active products at 5 or fewer" href="/admin/inventory" />
+        <Stat label="Low stock" value={String(stats.lowStockProducts)} detail={`Active products at ${LOW_STOCK_THRESHOLD} or fewer`} href="/admin/inventory?low=1" />
         <Stat label="Open orders" value={String(stats.openOrders)} detail="Pending, confirmed, or processing" href="/admin/orders?status=pending" />
         <Stat label="Cancelled orders" value={String(stats.cancelledOrders)} detail="Inventory released" href="/admin/orders?status=cancelled" />
         <Stat label="Average order" value={stats.totalOrders > 0 ? formatPrice(Math.round(stats.grossOrderValueCents / Math.max(1, stats.totalOrders - stats.cancelledOrders))) : "—"} detail="Across non-cancelled orders" />
+      </div>
+
+      <div className="mt-8">
+        <Suspense fallback={<LowStockAlertsSkeleton />}>
+          <LowStockAlerts />
+        </Suspense>
       </div>
 
       <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">

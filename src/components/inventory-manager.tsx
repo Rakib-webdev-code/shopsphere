@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { ProductMedia } from "@/components/product-media";
+import { StockStatusBadge } from "@/components/ui";
 import { apiRequest } from "@/lib/api-client";
+import { LOW_STOCK_THRESHOLD } from "@/lib/constants";
 import type { Product } from "@/lib/types";
 
 export function InventoryManager({ products }: { products: Product[] }) {
@@ -120,13 +122,19 @@ function InventoryRow({ product }: { product: Product }) {
       <td className="px-4 py-3">
         <span
           className={
-            product.stock <= 5
+            product.stock <= LOW_STOCK_THRESHOLD
               ? "font-semibold text-warning"
               : "font-medium text-foreground"
           }
         >
           {product.stock}
         </span>
+        <div className="mt-1">
+          <StockStatusBadge
+            stock={product.stock}
+            threshold={LOW_STOCK_THRESHOLD}
+          />
+        </div>
       </td>
       <td className="px-4 py-3">
         <form onSubmit={handleSubmit} className="flex items-center gap-2">

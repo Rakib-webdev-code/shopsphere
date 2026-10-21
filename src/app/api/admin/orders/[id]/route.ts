@@ -19,10 +19,10 @@ export async function GET(_request: Request, context: RouteParams) {
 
 export async function PATCH(request: Request, context: RouteParams) {
   return runApi(async () => {
-    await requireAdmin();
+    const admin = await requireAdmin();
     const { id } = await context.params;
     const body = asRecord(await readJsonBody(request));
-    const order = await updateOrderStatus(id, body.status);
+    const order = await updateOrderStatus(id, body.status, admin.id);
     return jsonResponse({ order });
   });
 }

@@ -40,6 +40,13 @@ export type ProductDoc = {
   active: boolean;
   ratingAverage: number;
   ratingCount: number;
+  /**
+   * Idempotency markers for cancelled orders whose stock has already been
+   * restored. A marker is written in the same atomic update as the `$inc`, so
+   * retrying a release (or recovering after a crash) can never add stock twice.
+   * The list is capped by the order service to keep product documents bounded.
+   */
+  inventoryRestorations?: { orderId: ObjectId; at: Date }[];
   createdAt: Date;
   updatedAt: Date;
 };
@@ -126,7 +133,13 @@ export type OrderDoc = {
   couponCode: string | null;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
-  inventoryState: "reserved" | "released";
+  /**
+   * `reserved` holds stock for the order. Cancellation first claims the order
+   * as `releasing`, then restores inventory idempotently, and only marks it
+   * `released` once every item and the coupon have been restored. A crash in
+   * between leaves `releasing`, which the recovery path can safely resume.
+   */
+  inventoryState: "reserved" | "releasing" | "released";
   /**
    * Optional so orders created before status history was added remain valid.
    * New orders always receive a pending event, and later transitions append.
@@ -164,6 +177,12 @@ export type CouponDoc = {
   minSubtotalCents: number;
   maxUses: number | null;
   usedCount: number;
+  /**
+   * Same idempotency mechanism as `ProductDoc.inventoryRestorations`, keyed by
+   * the cancelled order. Prevents a retried cancellation from decrementing
+   * `usedCount` twice.
+   */
+  couponRestorations?: { orderId: ObjectId; at: Date }[];
   expiresAt: Date | null;
   active: boolean;
   createdAt: Date;

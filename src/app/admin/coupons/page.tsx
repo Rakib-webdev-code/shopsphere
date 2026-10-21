@@ -3,6 +3,7 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 import { AdminCouponManager } from "@/components/admin-coupon-manager";
 import { Alert } from "@/components/ui";
+import { requireAdminPage } from "@/lib/auth/session";
 import { listCoupons } from "@/lib/services/coupons";
 
 export const metadata: Metadata = { title: "Coupons" };
@@ -17,6 +18,7 @@ export default function AdminCouponsPage() {
 
 async function CouponsContent() {
   await connection();
+  await requireAdminPage();
   let coupons;
 
   try {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
 import { Alert, inputClass } from "@/components/ui";
+import { requireAdminPage } from "@/lib/auth/session";
 import { formatPrice } from "@/lib/format";
 import { listCustomerSummaries } from "@/lib/services/admin";
 
@@ -28,6 +29,7 @@ async function CustomersContent({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   await connection();
+  await requireAdminPage();
   const params = await searchParams;
   const q = (firstValue(params.q) ?? "").trim().toLowerCase();
 

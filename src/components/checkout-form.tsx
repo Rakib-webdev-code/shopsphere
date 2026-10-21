@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState, type FormEvent } from "react";
+import { useMemo, useRef, useState, type FormEvent } from "react";
 import { CheckIcon } from "@/components/icons";
 import {
   Alert,
@@ -40,6 +40,13 @@ function shippingPayload(form: HTMLFormElement) {
   };
 }
 
+function createCheckoutKey() {
+  return (
+    globalThis.crypto?.randomUUID?.() ??
+    `checkout-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
+  );
+}
+
 export function CheckoutForm({
   cart,
   addresses,
@@ -56,6 +63,7 @@ export function CheckoutForm({
   const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const checkoutKeyRef = useRef<string | null>(null);
 
   const discountCents = couponPreview?.discountCents ?? 0;
   const shippingCents =
@@ -110,11 +118,19 @@ export function CheckoutForm({
 
     try {
       const form = event.currentTarget;
+      const checkoutKey =
+        checkoutKeyRef.current ?? createCheckoutKey();
+      checkoutKeyRef.current = checkoutKey;
       const body = useSaved
-        ? { addressId, couponCode: couponPreview?.coupon.code ?? "" }
+        ? {
+            addressId,
+            couponCode: couponPreview?.coupon.code ?? "",
+            checkoutKey,
+          }
         : {
             shipping: shippingPayload(form),
             couponCode: couponPreview?.coupon.code ?? "",
+            checkoutKey,
           };
       const result = await apiRequest<{ order: Order }>("/api/checkout", {
         method: "POST",

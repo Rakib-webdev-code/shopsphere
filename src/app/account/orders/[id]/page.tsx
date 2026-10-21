@@ -2,36 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { ArrowRightIcon, CheckIcon } from "@/components/icons";
+import { ArrowRightIcon } from "@/components/icons";
+import { OrderStatusTimeline } from "@/components/order-status-timeline";
 import { MediaThumb } from "@/components/product-media";
 import { Alert, OrderStatusBadge } from "@/components/ui";
 import { getCurrentUser } from "@/lib/auth/session";
+import { ApiError } from "@/lib/errors";
 import { formatPrice } from "@/lib/format";
 import { getOrderForUser } from "@/lib/services/orders";
-import type { OrderStatus } from "@/lib/types";
 
 type OrderDetailPageProps = PageProps<"/account/orders/[id]">;
 
 export const metadata: Metadata = {
   title: "Order details",
   robots: { index: false, follow: false },
-};
-
-const timeline: OrderStatus[] = [
-  "pending",
-  "confirmed",
-  "processing",
-  "shipped",
-  "delivered",
-];
-
-const timelineLabels: Record<OrderStatus, string> = {
-  pending: "Order placed",
-  confirmed: "Confirmed",
-  processing: "Preparing",
-  shipped: "Shipped",
-  delivered: "Delivered",
-  cancelled: "Cancelled",
 };
 
 export default function OrderDetailPage(props: OrderDetailPageProps) {
@@ -60,12 +44,17 @@ async function OrderDetail({
 
   try {
     order = await getOrderForUser(user.id, id);
-  } catch {
-    notFound();
-  }
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      notFound();
+    }
 
-  const currentIndex = timeline.indexOf(order.status);
-  const isCancelled = order.status === "cancelled";
+    return (
+      <Alert tone="error">
+        Order details could not be loaded. Please try again in a moment.
+      </Alert>
+    );
+  }
 
   return (
     <div>
@@ -103,37 +92,26 @@ async function OrderDetail({
       </div>
 
       <section className="mt-8 rounded-2xl border border-border bg-surface p-5 sm:p-6">
-        <h2 className="text-lg font-semibold text-foreground">Progress</h2>
-        {isCancelled ? (
-          <div className="mt-4 rounded-2xl bg-surface-subtle px-4 py-3 text-sm text-muted-strong">
-            This order was cancelled. Reserved inventory has been released.
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-semibold text-foreground">
+              Order tracking
+            </h2>
+            <p className="mt-1 text-sm text-muted">
+              Status changes recorded for this order.
+            </p>
           </div>
-        ) : (
-          <ol className="mt-5 grid gap-3 sm:grid-cols-5">
-            {timeline.map((step, index) => {
-              const complete = index <= currentIndex;
-              return (
-                <li key={step} className="flex items-center gap-2 sm:block">
-                  <span
-                    className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
-                      complete
-                        ? "bg-accent-solid text-white"
-                        : "bg-surface-subtle text-faint"
-                    }`}
-                  >
-                    {complete ? <CheckIcon className="h-4 w-4" /> : index + 1}
-                  </span>
-                  <p
-                    className={`mt-2 text-xs font-semibold ${
-                      complete ? "text-foreground" : "text-faint"
-                    }`}
-                  >
-                    {timelineLabels[step]}
-                  </p>
-                </li>
-              );
-            })}
-          </ol>
+          <OrderStatusBadge status={order.status} />
+        </div>
+        <OrderStatusTimeline
+          history={order.statusHistory}
+          createdAt={order.createdAt}
+          currentStatus={order.status}
+        />
+        {order.status === "cancelled" && order.inventoryState === "released" && (
+          <p className="mt-4 rounded-2xl bg-surface-subtle px-4 py-3 text-sm text-muted-strong">
+            This order was cancelled and its reserved inventory was released.
+          </p>
         )}
       </section>
 

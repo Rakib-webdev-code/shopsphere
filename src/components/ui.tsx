@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { LOW_STOCK_THRESHOLD } from "@/lib/constants";
 import type { OrderStatus } from "@/lib/types";
 
 export const inputClass =
@@ -124,6 +125,35 @@ export function OrderStatusBadge({ status }: { status: OrderStatus }) {
       className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold capitalize ring-1 ${statusClasses[status]}`}
     >
       {status}
+    </span>
+  );
+}
+
+export function StockStatusBadge({
+  stock,
+  threshold = LOW_STOCK_THRESHOLD,
+}: {
+  stock: number;
+  threshold?: number;
+}) {
+  const isOutOfStock = stock <= 0;
+  const isLowStock = !isOutOfStock && stock <= threshold;
+  const label = isOutOfStock
+    ? "Out of stock"
+    : isLowStock
+      ? "Low stock"
+      : "In stock";
+  const tone = isOutOfStock
+    ? "bg-danger-soft text-danger ring-danger-border"
+    : isLowStock
+      ? "bg-warning-soft text-warning ring-warning-border"
+      : "bg-accent-soft text-accent-strong ring-accent-border";
+
+  return (
+    <span
+      className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${tone}`}
+    >
+      {label}
     </span>
   );
 }

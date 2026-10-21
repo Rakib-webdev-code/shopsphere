@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { headers } from "next/headers";
+import { notFound, redirect } from "next/navigation";
 import { connection } from "next/server";
 import { ObjectId } from "mongodb";
 import { auth } from "@/lib/auth";
@@ -75,6 +76,27 @@ export async function requireAdmin(): Promise<CurrentUser> {
 
   if (user.role !== "admin") {
     throw forbidden("Administrator access is required.");
+  }
+
+  return user;
+}
+
+/**
+ * Page-level authorization for `/admin/*`.
+ *
+ * The admin layout gate alone is not sufficient: Next.js can render a page in
+ * parallel with its layout, so admin page data may be streamed before the
+ * layout rejects a non-admin. Every admin page calls this before reading data.
+ */
+export async function requireAdminPage(): Promise<CurrentUser> {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    redirect("/sign-in?next=%2Fadmin");
+  }
+
+  if (user.role !== "admin") {
+    notFound();
   }
 
   return user;
