@@ -26,6 +26,7 @@ let db;
 let mongoClient;
 let collections;
 let orders;
+let cart;
 
 if (hasMongo) {
   const mongodb = await import("../src/lib/mongodb.ts");
@@ -35,6 +36,7 @@ if (hasMongo) {
   assert.equal(db.databaseName, testDbName);
   collections = await import("../src/lib/db/collections.ts");
   orders = await import("../src/lib/services/orders.ts");
+  cart = await import("../src/lib/services/cart.ts");
 }
 
 function newCheckoutKey(label = "checkout") {
@@ -182,7 +184,7 @@ if (hasMongo) {
   });
 
   after(async () => {
-    await dropTestDatabase(db);
+    await dropTestDatabase(db, testDbName);
     await mongoClient.close();
   });
 }
@@ -254,6 +256,136 @@ dbTest("a failed multi-line reservation releases the lines that already succeede
       .length,
     2,
   );
+});
+
+dbTest("recovery fences a paused checkout before the worker can reserve later lines", async () => {
+  const user = testUser("stale-worker");
+  const first = await insertProduct({ stock: 5 });
+  const second = await insertProduct({ stock: 5 });
+  await setCart(user.id, [
+    [first._id, 1],
+    [second._id, 1],
+  ]);
+
+  let notifyEntered;
+  let resumeWorker;
+  const entered = new Promise((resolve) => {
+    notifyEntered = resolve;
+  });
+  const paused = new Promise((resolve) => {
+    resumeWorker = resolve;
+  });
+  const originalUpdateOne = collections.productsCollection.updateOne.bind(
+    collections.productsCollection,
+  );
+  let shouldPause = true;
+  collections.productsCollection.updateOne = async (filter, update, options) => {
+    if (shouldPause && filter?._id?.equals(first._id) && update?.$inc?.stock < 0) {
+      shouldPause = false;
+      notifyEntered();
+      await paused;
+    }
+
+    return originalUpdateOne(filter, update, options);
+  };
+
+  const checkoutKey = newCheckoutKey("stale-worker");
+  const checkout = orders.createOrder(user, { shipping: SHIPPING, checkoutKey });
+
+  try {
+    await entered;
+    const order = await collections.ordersCollection.findOne({
+      userId: user.id,
+      checkoutKey,
+    });
+    assert.ok(order);
+
+    const staleAt = new Date(Date.now() - 120_000);
+    await collections.ordersCollection.updateOne(
+      { _id: order._id },
+      {
+        $set: {
+          updatedAt: staleAt,
+          "inventoryClaim.at": staleAt,
+        },
+      },
+    );
+
+    const recovered = await orders.recoverPendingInventoryReleases();
+    assert.equal(recovered.aborted, 1);
+    assert.equal((await getOrder(order._id.toHexString())).inventoryState, "released");
+
+    // Let the old worker's first attempted update run after recovery has fenced
+    // both product documents. It must fail without changing either stock.
+    resumeWorker();
+    await assert.rejects(checkout);
+  } finally {
+    resumeWorker();
+    collections.productsCollection.updateOne = originalUpdateOne;
+  }
+
+  assert.equal((await getProduct(first._id)).stock, 5);
+  assert.equal((await getProduct(second._id)).stock, 5);
+  const firstAfter = await getProduct(first._id);
+  const secondAfter = await getProduct(second._id);
+  const finalOrder = await collections.ordersCollection.findOne({
+    userId: user.id,
+    checkoutKey,
+  });
+  assert.ok(finalOrder);
+  assert.ok(firstAfter.inventoryRestorations?.some((entry) => entry.orderId.equals(finalOrder._id)));
+  assert.ok(secondAfter.inventoryRestorations?.some((entry) => entry.orderId.equals(finalOrder._id)));
+});
+
+dbTest("force-release refuses a live claim and restores before its audited terminal transition", async () => {
+  const user = testUser("force-release-race");
+  const admin = { ...testUser("force-release-admin"), role: "admin" };
+  const product = await insertProduct({ stock: 5 });
+  await setCart(user.id, [[product._id, 1]]);
+  const order = await orders.createOrder(user, {
+    shipping: SHIPPING,
+    checkoutKey: newCheckoutKey("force-release"),
+  });
+  const orderId = new ObjectId(order.id);
+  const liveAt = new Date();
+
+  await collections.ordersCollection.updateOne(
+    { _id: orderId },
+    {
+      $set: {
+        inventoryState: "reserving",
+        inventoryClaim: { token: "live-worker", at: liveAt },
+        reconciliationRequired: true,
+      },
+    },
+  );
+
+  await assert.rejects(
+    orders.resolveOrderReconciliation(order.id, admin, "force-release"),
+    (error) => {
+      assert.equal(error.status, 409);
+      return true;
+    },
+  );
+  assert.equal((await getProduct(product._id)).stock, 4);
+
+  const staleAt = new Date(Date.now() - 120_000);
+  await collections.ordersCollection.updateOne(
+    { _id: orderId },
+    { $set: { updatedAt: staleAt, "inventoryClaim.at": staleAt } },
+  );
+
+  const released = await orders.resolveOrderReconciliation(
+    order.id,
+    admin,
+    "force-release",
+  );
+  assert.equal(released.inventoryState, "released");
+  assert.equal(released.reconciliationRequired, false);
+  assert.equal((await getProduct(product._id)).stock, 5);
+  const finalOrder = await getOrder(order.id);
+  assert.equal(finalOrder.reconciliationResolvedByAdminId, admin.id);
+  assert.ok(finalOrder.statusHistory.some((event) => event.changedByAdminId === admin.id));
 });
 
 dbTest("duplicate checkout keys return one order and deduct once", async () => {
@@ -538,7 +670,9 @@ dbTest("a cancellation that fails mid-release is resumed without double restorin
   assert.equal(raw.status, "cancelled");
   assert.equal(raw.inventoryState, "releasing");
   assert.equal((await getProduct(product._id)).stock, 8);
-  assert.equal((await collections.couponsCollection.findOne({ _id: coupon._id })).usedCount, 1);
+  // Coupon restoration is independent of stock restoration: the release pass
+  // restores everything it can and leaves only the failed effect for recovery.
+  assert.equal((await collections.couponsCollection.findOne({ _id: coupon._id })).usedCount, 0);
 
   await resetValidators();
 
@@ -640,4 +774,335 @@ dbTest("customer order ownership returns 404 while the explicit ownership check 
 
   const adminView = await orders.getOrderForAdmin(order.id);
   assert.equal(adminView.id, order.id);
+});
+
+dbTest("compensation checkout aborts instead of erasing a concurrent add", async () => {
+  const user = testUser("race-add");
+  const [purchased, added] = await Promise.all([
+    insertProduct({ stock: 10 }),
+    insertProduct({ stock: 10 }),
+  ]);
+  await setCart(user.id, [[purchased._id, 1]]);
+  const originalInsert = collections.ordersCollection.insertOne.bind(
+    collections.ordersCollection,
+  );
+  let triggered = false;
+
+  collections.ordersCollection.insertOne = async (document, options) => {
+    if (!triggered) {
+      triggered = true;
+      await cart.addCartItem(user.id, {
+        productId: added._id.toHexString(),
+        quantity: 1,
+      });
+    }
+
+    return originalInsert(document, options);
+  };
+
+  try {
+    await assert.rejects(
+      orders.createOrder(user, { shipping: SHIPPING, checkoutKey: newCheckoutKey("race-add") }),
+      (error) => {
+        assert.equal(error.status, 409);
+        return true;
+      },
+    );
+  } finally {
+    collections.ordersCollection.insertOne = originalInsert;
+  }
+
+  // The durable checkout record is retained after a cart conflict so recovery
+  // can prove the reservation was compensated. It is never fulfillable.
+  assert.equal(await collections.ordersCollection.countDocuments({}), 1);
+  const aborted = await collections.ordersCollection.findOne({});
+  assert.equal(aborted.status, "cancelled");
+  assert.equal(aborted.inventoryState, "released");
+  assert.equal((await getProduct(purchased._id)).stock, 10);
+  assert.equal((await getProduct(added._id)).stock, 10);
+  const rawCart = await collections.cartsCollection.findOne({
+    userId: user.id,
+  });
+  const quantities = new Map(
+    rawCart.items.map((item) => [item.productId.toHexString(), item.quantity]),
+  );
+  assert.equal(quantities.get(purchased._id.toHexString()), 1);
+  assert.equal(quantities.get(added._id.toHexString()), 1);
+});
+
+dbTest("compensation checkout aborts instead of purchasing a concurrently removed line", async () => {
+  const user = testUser("race-remove");
+  const product = await insertProduct({ stock: 10 });
+  await setCart(user.id, [[product._id, 1]]);
+  const originalInsert = collections.ordersCollection.insertOne.bind(
+    collections.ordersCollection,
+  );
+  let triggered = false;
+
+  collections.ordersCollection.insertOne = async (document, options) => {
+    if (!triggered) {
+      triggered = true;
+      await cart.removeCartItem(user.id, product._id.toHexString());
+    }
+
+    return originalInsert(document, options);
+  };
+
+  try {
+    await assert.rejects(
+      orders.createOrder(user, { shipping: SHIPPING, checkoutKey: newCheckoutKey("race-remove") }),
+      (error) => {
+        assert.equal(error.status, 409);
+        return true;
+      },
+    );
+  } finally {
+    collections.ordersCollection.insertOne = originalInsert;
+  }
+
+  assert.equal(await collections.ordersCollection.countDocuments({}), 1);
+  const aborted = await collections.ordersCollection.findOne({});
+  assert.equal(aborted.status, "cancelled");
+  assert.equal(aborted.inventoryState, "released");
+  assert.equal((await getProduct(product._id)).stock, 10);
+  const rawCart = await collections.cartsCollection.findOne({
+    userId: user.id,
+  });
+  assert.deepEqual(rawCart.items, []);
+});
+
+dbTest("clearPurchasedCartItems clears only purchased quantities and preserves concurrent additions", async () => {
+  const user = testUser("cart-clear-concurrent");
+  const [purchased, added] = await Promise.all([
+    insertProduct({ stock: 20 }),
+    insertProduct({ stock: 20 }),
+  ]);
+
+  // User initially had purchased product with quantity 2
+  await setCart(user.id, [[purchased._id, 2]]);
+
+  // Concurrently, user adds another product and increases quantity of purchased product to 5
+  await cart.addCartItem(user.id, { productId: added._id.toHexString(), quantity: 1 });
+  await cart.updateCartItem(user.id, purchased._id.toHexString(), { quantity: 5 });
+
+  // Clear for the order that bought 2 of purchased product
+  await cart.clearPurchasedCartItems(user.id, [{ productId: purchased._id, quantity: 2 }]);
+
+  const updatedCart = await collections.cartsCollection.findOne({ userId: user.id });
+  const itemMap = new Map(updatedCart.items.map((i) => [i.productId.toHexString(), i.quantity]));
+
+  // Remaining quantity of purchased product is 5 - 2 = 3
+  assert.equal(itemMap.get(purchased._id.toHexString()), 3);
+  // Concurrently added product is preserved with quantity 1
+  assert.equal(itemMap.get(added._id.toHexString()), 1);
+
+  // Now clear the remaining 3 units
+  await cart.clearPurchasedCartItems(user.id, [{ productId: purchased._id, quantity: 3 }]);
+  const clearedCart = await collections.cartsCollection.findOne({ userId: user.id });
+  const clearedMap = new Map(clearedCart.items.map((i) => [i.productId.toHexString(), i.quantity]));
+
+  // Purchased product is now removed
+  assert.equal(clearedMap.get(purchased._id.toHexString()), undefined);
+  // Added product is still preserved
+  assert.equal(clearedMap.get(added._id.toHexString()), 1);
+});
+
+dbTest("reserving order with fresh claim returns CHECKOUT_IN_PROGRESS to prevent premature key rotation", async () => {
+  const user = testUser("checkout-in-progress");
+  const product = await insertProduct({ stock: 5 });
+  await setCart(user.id, [[product._id, 1]]);
+
+  const checkoutKey = newCheckoutKey("in-prog");
+  const now = new Date();
+
+  // Create an order in "reserving" state with a fresh claim
+  await collections.ordersCollection.insertOne({
+    _id: new ObjectId(),
+    orderNumber: "SS-TEST-INPROGRESS",
+    userId: user.id,
+    customerEmail: user.email,
+    items: [{
+      productId: product._id,
+      name: product.name,
+      slug: product.slug,
+      image: null,
+      priceInCents: product.priceInCents,
+      quantity: 1,
+      lineTotalCents: product.priceInCents,
+    }],
+    shippingAddress: {
+      label: "Shipping",
+      fullName: "Test",
+      line1: "123 St",
+      line2: null,
+      city: "City",
+      state: "ST",
+      postalCode: "12345",
+      country: "US",
+      phone: null,
+    },
+    subtotalCents: product.priceInCents,
+    discountCents: 0,
+    shippingCents: 0,
+    totalCents: product.priceInCents,
+    couponId: null,
+    couponCode: null,
+    status: "pending",
+    paymentStatus: "unpaid",
+    inventoryState: "reserving",
+    inventoryClaim: { token: "active-token", at: now },
+    checkoutKey,
+    createdAt: now,
+    updatedAt: now,
+  });
+
+  // Retrying with the same checkoutKey while reserving must return CHECKOUT_IN_PROGRESS
+  await assert.rejects(
+    orders.createOrder(user, { checkoutKey, shipping: SHIPPING }),
+    (error) => {
+      assert.equal(error.status, 409);
+      assert.equal(error.code, "CHECKOUT_IN_PROGRESS");
+      return true;
+    },
+  );
+});
+
+dbTest("deleted product during inventory release flags order as reconciliationRequired and avoids recovery starvation", async () => {
+  const user = testUser("reconciliation-recovery");
+  const admin = { ...testUser("admin-recon"), role: "admin" };
+  const [productA, productB] = await Promise.all([
+    insertProduct({ stock: 10 }),
+    insertProduct({ stock: 10 }),
+  ]);
+
+  const now = new Date(Date.now() - 120_000); // 2 minutes ago (stale)
+
+  // Order A has product A (which we will delete)
+  const orderAId = new ObjectId();
+  await collections.ordersCollection.insertOne({
+    _id: orderAId,
+    orderNumber: "SS-TEST-RECON-A",
+    userId: user.id,
+    customerEmail: user.email,
+    items: [{
+      productId: productA._id,
+      name: productA.name,
+      slug: productA.slug,
+      image: null,
+      priceInCents: productA.priceInCents,
+      quantity: 2,
+      lineTotalCents: productA.priceInCents * 2,
+    }],
+    shippingAddress: {
+      label: "Shipping",
+      fullName: "Test",
+      line1: "123 St",
+      line2: null,
+      city: "City",
+      state: "ST",
+      postalCode: "12345",
+      country: "US",
+      phone: null,
+    },
+    subtotalCents: productA.priceInCents * 2,
+    discountCents: 0,
+    shippingCents: 0,
+    totalCents: productA.priceInCents * 2,
+    couponId: null,
+    couponCode: null,
+    status: "cancelled",
+    paymentStatus: "unpaid",
+    inventoryState: "releasing",
+    inventoryClaim: null,
+    reservationCompletedAt: now,
+    createdAt: now,
+    updatedAt: now,
+  });
+
+  // Order B has product B (which still exists)
+  const orderBId = new ObjectId();
+  await collections.ordersCollection.insertOne({
+    _id: orderBId,
+    orderNumber: "SS-TEST-RECON-B",
+    userId: user.id,
+    customerEmail: user.email,
+    items: [{
+      productId: productB._id,
+      name: productB.name,
+      slug: productB.slug,
+      image: null,
+      priceInCents: productB.priceInCents,
+      quantity: 1,
+      lineTotalCents: productB.priceInCents,
+    }],
+    shippingAddress: {
+      label: "Shipping",
+      fullName: "Test",
+      line1: "123 St",
+      line2: null,
+      city: "City",
+      state: "ST",
+      postalCode: "12345",
+      country: "US",
+      phone: null,
+    },
+    subtotalCents: productB.priceInCents,
+    discountCents: 0,
+    shippingCents: 0,
+    totalCents: productB.priceInCents,
+    couponId: null,
+    couponCode: null,
+    status: "cancelled",
+    paymentStatus: "unpaid",
+    inventoryState: "releasing",
+    inventoryClaim: null,
+    reservationCompletedAt: now,
+    createdAt: now,
+    updatedAt: now,
+  });
+
+  // Delete product A from the database
+  await collections.productsCollection.deleteOne({ _id: productA._id });
+
+  // Run recovery: Order A fails (product missing), Order B succeeds
+  const recoveryResult = await orders.recoverPendingInventoryReleases(10);
+  assert.equal(recoveryResult.failed.includes(orderAId.toHexString()), true);
+  assert.equal(recoveryResult.released, 1);
+
+  // Order A is durably marked reconciliationRequired
+  const docA = await collections.ordersCollection.findOne({ _id: orderAId });
+  assert.equal(docA.inventoryState, "releasing");
+  assert.equal(docA.reconciliationRequired, true);
+  assert.ok(docA.reconciliationError?.includes("no longer exists"));
+
+  // Order B was successfully released
+  const docB = await collections.ordersCollection.findOne({ _id: orderBId });
+  assert.equal(docB.inventoryState, "released");
+  assert.equal((await getProduct(productB._id)).stock, 11);
+
+  // Subsequent recovery passes skip Order A so the queue does not starve
+  const nextRecovery = await orders.recoverPendingInventoryReleases(10);
+  assert.equal(nextRecovery.scanned, 0);
+
+  // Non-admin cannot resolve reconciliation
+  await assert.rejects(
+    orders.resolveOrderReconciliation(orderAId.toHexString(), user, "force-release"),
+    (err) => {
+      assert.equal(err.status, 403);
+      return true;
+    },
+  );
+
+  // Admin resolves reconciliation via force-release
+  const resolved = await orders.resolveOrderReconciliation(
+    orderAId.toHexString(),
+    admin,
+    "force-release",
+  );
+  assert.equal(resolved.inventoryState, "released");
+  assert.equal(resolved.reconciliationRequired, false);
+
+  const docAFinal = await collections.ordersCollection.findOne({ _id: orderAId });
+  assert.equal(docAFinal.inventoryState, "released");
+  assert.equal(docAFinal.reconciliationResolvedByAdminId, admin.id);
 });

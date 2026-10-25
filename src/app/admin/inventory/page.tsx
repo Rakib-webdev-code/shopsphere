@@ -58,8 +58,10 @@ async function InventoryContent({
             Inventory
           </h2>
           <p className="mt-1.5 text-sm text-muted">
-            Update stock directly. Checkout reserves stock with a conditional
-            database update, so concurrent orders cannot oversell.
+            Change stock with a reason. Each adjustment is guarded against stale
+            pages and recorded in an audit trail. Checkout reservations use the
+            same conditional database updates, so concurrent orders cannot
+            oversell.
           </p>
         </div>
         <div className="rounded-2xl border border-warning-border bg-warning-soft px-4 py-3 text-sm text-warning">

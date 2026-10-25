@@ -102,7 +102,12 @@ async function CheckoutContent() {
           </Alert>
         </div>
       )}
-      <CheckoutForm cart={cart} addresses={addresses} customerName={user.name} />
+      <CheckoutForm
+        cart={cart}
+        addresses={addresses}
+        userId={user.id}
+        customerName={user.name}
+      />
     </div>
   );
 }

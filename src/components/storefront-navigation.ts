@@ -1,6 +1,7 @@
 export const desktopNavLinks = [
   { href: "/shop", label: "Shop" },
   { href: "/categories", label: "Categories" },
+  { href: "/assistant", label: "Assistant" },
   { href: "/about", label: "About" },
 ] as const;
 

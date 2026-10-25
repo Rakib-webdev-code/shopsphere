@@ -100,6 +100,12 @@ export type Cart = {
   itemCount: number;
   subtotalCents: number;
   hasUnavailableItems: boolean;
+  /**
+   * Optimistic-concurrency revision. The checkout form scopes its idempotency
+   * key to this value so a reload of the same logical checkout reuses the key
+   * while a changed cart starts a new checkout.
+   */
+  revision: number;
   updatedAt: string | null;
 };
 
@@ -220,7 +226,9 @@ export type Order = {
   couponCode: string | null;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
-  inventoryState: "reserved" | "releasing" | "released";
+  inventoryState: "reserving" | "reserved" | "releasing" | "released";
+  reconciliationRequired?: boolean;
+  reconciliationError?: string | null;
   statusHistory: OrderStatusEvent[];
   createdAt: string;
   updatedAt: string;

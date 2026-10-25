@@ -17,8 +17,45 @@ export type CategoryDoc = {
   icon: ProductIconName;
   imageUrl: string | null;
   active: boolean;
+  /** In-flight checkouts hold this marker while validating and reserving stock. */
+  checkoutReservations?: { orderId: ObjectId; at: Date }[];
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type StockAdjustmentKind = "manual" | "initial";
+
+export type StockAdjustmentDoc = {
+  _id: ObjectId;
+  productId: ObjectId;
+  adminUserId: string;
+  kind: StockAdjustmentKind;
+  delta: number;
+  beforeStock: number;
+  afterStock: number;
+  reason: string;
+  at: Date;
+};
+
+export type InventoryState =
+  | "reserving"
+  | "reserved"
+  | "releasing"
+  | "released";
+
+/**
+ * Durable snapshot of the cart that was validated for a checkout. It is stored
+ * on the order before any stock or coupon effect is applied so recovery can
+ * finish or abort a checkout without relying on process memory.
+ */
+export type CheckoutSnapshotDoc = {
+  cartId: ObjectId;
+  /** `null` means the cart predates the revision field. */
+  cartRevision: number | null;
+  cartItems: CartItemDoc[];
+  /** Categories held active until checkout reaches a durable terminal decision. */
+  categoryIds?: ObjectId[];
+  startedAt: Date;
 };
 
 export type ProductDoc = {
@@ -41,11 +78,19 @@ export type ProductDoc = {
   ratingAverage: number;
   ratingCount: number;
   /**
-   * Idempotency markers for cancelled orders whose stock has already been
-   * restored. A marker is written in the same atomic update as the `$inc`, so
-   * retrying a release (or recovering after a crash) can never add stock twice.
-   * The list is capped by the order service to keep product documents bounded.
+   * Idempotency evidence for stock effects, written in the same atomic update
+   * as the `$inc`. `inventoryReservations` proves that an order's decrement was
+   * applied; `inventoryRestorations` proves that the matching increment was
+   * applied. Recovery can therefore tell an applied effect from an unapplied
+   * (or uncertain) one after an ambiguous acknowledgement or process crash.
+   * A restoration marker also fences a late reservation attempt for the same
+   * order, even when recovery proves that no decrement had happened yet.
+   *
+   * These arrays are deliberately never truncated: evicting an entry while a
+   * retry is still possible could double-apply stock. A future compaction job
+   * may remove entries only once no recovery can ever reference the order.
    */
+  inventoryReservations?: { orderId: ObjectId; at: Date }[];
   inventoryRestorations?: { orderId: ObjectId; at: Date }[];
   createdAt: Date;
   updatedAt: Date;
@@ -61,6 +106,11 @@ export type CartDoc = {
   _id: ObjectId;
   userId: string;
   items: CartItemDoc[];
+  /**
+   * Optimistic-concurrency revision. Legacy carts without this field are
+   * treated as revision 0 by the cart service.
+   */
+  revision?: number;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -134,12 +184,38 @@ export type OrderDoc = {
   status: OrderStatus;
   paymentStatus: PaymentStatus;
   /**
-   * `reserved` holds stock for the order. Cancellation first claims the order
-   * as `releasing`, then restores inventory idempotently, and only marks it
-   * `released` once every item and the coupon have been restored. A crash in
-   * between leaves `releasing`, which the recovery path can safely resume.
+   * Reservation lifecycle (see `orders.ts` for the full transition table):
+   *
+   *   reserving -> reserved -> releasing -> released
+   *        \__________/          ^
+   *              abort ___________|
+   *
+   * `reserving` is written before any stock/coupon effect. Only `reserved`
+   * orders may be fulfilled. `releasing` is an atomic cancellation/recovery
+   * claim; `released` is terminal. A crash at any point leaves a durable state
+   * that `recoverPendingInventoryReleases` can finish without double effects.
    */
-  inventoryState: "reserved" | "releasing" | "released";
+  inventoryState: InventoryState;
+  /** Cart snapshot captured before reservations, used for recovery/cleanup. */
+  checkout?: CheckoutSnapshotDoc;
+  /**
+   * Short-lived ownership token for an actor finalizing, aborting, or releasing
+   * this order. Workers may take over only after the claim goes stale.
+   */
+  inventoryClaim?: { token: string; at: Date } | null;
+  /** Set when every stock/coupon effect has been applied durably. */
+  reservationCompletedAt?: Date | null;
+  /** Set once the cart snapshot was conditionally cleared. */
+  cartClearedAt?: Date | null;
+  categoryReservationsReleasedAt?: Date | null;
+  /** Number of recovery attempts, exposed for operator diagnostics. */
+  recoveryAttempts?: number;
+  lastRecoveryAt?: Date | null;
+  /** Durable flag set when inventory restoration failed permanently (e.g. deleted entity). */
+  reconciliationRequired?: boolean;
+  reconciliationError?: string | null;
+  reconciliationResolvedAt?: Date | null;
+  reconciliationResolvedByAdminId?: string | null;
   /**
    * Optional so orders created before status history was added remain valid.
    * New orders always receive a pending event, and later transitions append.
@@ -178,10 +254,12 @@ export type CouponDoc = {
   maxUses: number | null;
   usedCount: number;
   /**
-   * Same idempotency mechanism as `ProductDoc.inventoryRestorations`, keyed by
-   * the cancelled order. Prevents a retried cancellation from decrementing
-   * `usedCount` twice.
+   * Same atomic idempotency mechanism as `ProductDoc`. `couponReservations`
+   * proves the order incremented `usedCount`; `couponRestorations` proves the
+   * matching decrement was applied. A restoration marker also fences a late
+   * reservation attempt. Never truncated for the same reason.
    */
+  couponReservations?: { orderId: ObjectId; at: Date }[];
   couponRestorations?: { orderId: ObjectId; at: Date }[];
   expiresAt: Date | null;
   active: boolean;

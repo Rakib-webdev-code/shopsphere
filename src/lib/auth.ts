@@ -82,6 +82,8 @@ export const auth = betterAuth({
   },
   database: mongodbAdapter(db, {
     client: mongoClient,
-    transaction: true,
+    // Local ShopSphere development uses a standalone MongoDB instance, which
+    // does not support transactions. Keep auth writes compatible with it.
+    transaction: false,
   }),
 });

@@ -13,6 +13,11 @@ import {
 } from "@/components/ui";
 import { ApiClientError, apiRequest } from "@/lib/api-client";
 import {
+  clearStoredCheckoutKey,
+  resolveCheckoutKey,
+  type CheckoutKeyStorage,
+} from "@/lib/checkout-key";
+import {
   FREE_SHIPPING_THRESHOLD_CENTS,
   SHIPPING_FEE_CENTS,
 } from "@/lib/constants";
@@ -22,6 +27,7 @@ import type { Address, Cart, CouponPreview, Order } from "@/lib/types";
 type CheckoutFormProps = {
   cart: Cart;
   addresses: Address[];
+  userId: string;
   customerName: string;
 };
 
@@ -47,9 +53,23 @@ function createCheckoutKey() {
   );
 }
 
+function getCheckoutStorage(): CheckoutKeyStorage | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  try {
+    return window.sessionStorage;
+  } catch {
+    // Storage can be blocked (for example in some private-browsing modes).
+    return null;
+  }
+}
+
 export function CheckoutForm({
   cart,
   addresses,
+  userId,
   customerName,
 }: CheckoutFormProps) {
   const router = useRouter();
@@ -118,8 +138,15 @@ export function CheckoutForm({
 
     try {
       const form = event.currentTarget;
+      const storage = getCheckoutStorage();
       const checkoutKey =
-        checkoutKeyRef.current ?? createCheckoutKey();
+        checkoutKeyRef.current ??
+        resolveCheckoutKey({
+          storage,
+          userId,
+          cartRevision: cart.revision,
+          createKey: createCheckoutKey,
+        });
       checkoutKeyRef.current = checkoutKey;
       const body = useSaved
         ? {
@@ -136,12 +163,26 @@ export function CheckoutForm({
         method: "POST",
         body: JSON.stringify(body),
       });
+      // The checkout is definitively complete for this cart revision. Do not
+      // reuse its key if the same revision is somehow rendered again.
+      clearStoredCheckoutKey(storage, userId, cart.revision);
+      checkoutKeyRef.current = null;
       router.push(`/account/orders/${result.order.id}?created=1`);
       router.refresh();
     } catch (requestError) {
       if (requestError instanceof ApiClientError && requestError.status === 401) {
         router.push("/sign-in?next=%2Fcheckout");
         return;
+      }
+
+      if (
+        requestError instanceof ApiClientError &&
+        requestError.code === "CHECKOUT_RETRY_REQUIRED"
+      ) {
+        // The server aborted the previous attempt and the key is spent for
+        // this cart revision. The next click starts a fresh checkout.
+        clearStoredCheckoutKey(getCheckoutStorage(), userId, cart.revision);
+        checkoutKeyRef.current = null;
       }
 
       setError(

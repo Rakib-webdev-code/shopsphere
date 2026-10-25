@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
 import {
+  categoriesCollection,
   ordersCollection,
   productsCollection,
   reviewsCollection,
@@ -94,6 +95,15 @@ export async function createReview(
 
   if (!product) {
     throw notFound("Product not found.");
+  }
+
+  const category = await categoriesCollection.findOne(
+    { _id: product.categoryId },
+    { projection: { active: 1 } },
+  );
+
+  if (category && !category.active) {
+    throw conflict("This product category is no longer available.");
   }
 
   const existing = await reviewsCollection.findOne({

@@ -16,9 +16,12 @@ import {
 const enabled =
   (process.env.SHOPSPHERE_HTTP_TESTS === "1" ||
     process.env.npm_lifecycle_event === "test:http") &&
-  existsSync(path.join(process.cwd(), ".next", "BUILD_ID"));
+  existsSync(path.join(process.cwd(), ".next", "BUILD_ID")) &&
+  Boolean(process.env.MONGODB_URI);
 const httpTest = enabled ? test : test.skip;
-const testDbName = enabled ? configureTestDatabase() : null;
+const testDbName = enabled
+  ? configureTestDatabase({ transactions: "auto" })
+  : null;
 
 let db;
 let mongoClient;
@@ -29,6 +32,7 @@ let baseUrl;
 let serverOutput = "";
 let admin;
 let customer;
+let transactionSupport = false;
 
 function newCheckoutKey() {
   return `http-${randomBytes(12).toString("hex")}`;
@@ -163,6 +167,8 @@ if (enabled) {
   assert.equal(db.databaseName, testDbName);
   collections = await import("../src/lib/db/collections.ts");
   orders = await import("../src/lib/services/orders.ts");
+  const transactions = await import("../src/lib/db/transactions.ts");
+  transactionSupport = await transactions.supportsTransactions();
 
   before(async () => {
     assertIsolatedDatabase(db.databaseName);
@@ -220,7 +226,7 @@ if (enabled) {
           ...process.env,
           NODE_ENV: "production",
           MONGODB_DB: testDbName,
-          MONGODB_TRANSACTIONS: "off",
+          MONGODB_TRANSACTIONS: "auto",
           BETTER_AUTH_URL: baseUrl,
         },
         stdio: ["ignore", "pipe", "pipe"],
@@ -246,12 +252,15 @@ if (enabled) {
       { _id: adminDoc._id },
       { $set: { role: "admin" } },
     );
+    admin.id = adminDoc._id.toHexString();
+    admin.productId = normalStock._id.toHexString();
 
     const customerDoc = await collections.usersCollection.findOne({
       email: customer.email,
     });
     assert.ok(customerDoc, "customer test user should exist");
     const customerUser = userFor(customerDoc);
+    customer.user = customerUser;
     await seedCart(customerUser.id, [[lowStock._id, 1]]);
     const order = await orders.createOrder(customerUser, {
       shipping: {
@@ -274,7 +283,7 @@ if (enabled) {
 
   after(async () => {
     await stopServer();
-    await dropTestDatabase(db);
+    await dropTestDatabase(db, testDbName);
     await mongoClient.close();
   });
 }
@@ -302,6 +311,105 @@ httpTest("unauthenticated requests receive 401 and non-admin requests receive 40
     body: JSON.stringify({}),
   });
   assert.equal(checkout.status, 401);
+});
+
+httpTest("stock adjustment API requires an admin session and rejects stale stock", async () => {
+  const url = `${baseUrl}/api/admin/products/${admin.productId}/stock`;
+  const body = JSON.stringify({
+    expectedStock: 20,
+    delta: 1,
+    reason: "HTTP restock",
+    adminUserId: "spoofed-client-id",
+  });
+
+  const unauthenticated = await fetch(url, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body,
+  });
+  assert.equal(unauthenticated.status, 401);
+  assert.equal((await unauthenticated.json()).error.code, "UNAUTHORIZED");
+
+  const asCustomer = await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      cookie: customer.cookie,
+    },
+    body,
+  });
+  assert.equal(asCustomer.status, 403);
+  assert.equal((await asCustomer.json()).error.code, "FORBIDDEN");
+
+  const asAdmin = await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      cookie: admin.cookie,
+    },
+    body,
+  });
+
+  if (!transactionSupport) {
+    assert.equal(asAdmin.status, 503);
+    assert.equal(
+      (await asAdmin.json()).error.code,
+      "TRANSACTIONS_UNAVAILABLE",
+    );
+
+    const raw = await collections.productsCollection.findOne({
+      _id: new ObjectId(admin.productId),
+    });
+    assert.equal(raw.stock, 20);
+    assert.equal(
+      await collections.inventoryAdjustmentsCollection.countDocuments({
+        productId: new ObjectId(admin.productId),
+      }),
+      0,
+    );
+    return;
+  }
+
+  assert.equal(asAdmin.status, 200);
+  const adminResult = await asAdmin.json();
+  assert.equal(adminResult.product.stock, 21);
+  assert.equal(adminResult.adjustment.adminUserId, admin.id);
+  assert.equal(adminResult.adjustment.kind, "manual");
+
+  const raw = await collections.productsCollection.findOne({
+    _id: new ObjectId(admin.productId),
+  });
+  assert.equal(raw.stock, 21);
+  assert.equal("stockAdjustments" in raw, false);
+  const adjustments =
+    await collections.inventoryAdjustmentsCollection.find({
+      productId: new ObjectId(admin.productId),
+    }).toArray();
+  assert.equal(adjustments.length, 1);
+  assert.equal(adjustments[0].adminUserId, admin.id);
+  assert.notEqual(adjustments[0].adminUserId, "spoofed-client-id");
+
+  const stale = await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      cookie: admin.cookie,
+    },
+    body,
+  });
+  assert.equal(stale.status, 409);
+  assert.equal((await stale.json()).error.code, "STOCK_CONFLICT");
+
+  const afterStale = await collections.productsCollection.findOne({
+    _id: new ObjectId(admin.productId),
+  });
+  assert.equal(afterStale.stock, 21);
+  assert.equal(
+    await collections.inventoryAdjustmentsCollection.countDocuments({
+      productId: new ObjectId(admin.productId),
+    }),
+    1,
+  );
 });
 
 httpTest("customer order API enforces ownership and keeps payment unpaid", async () => {
@@ -380,4 +488,84 @@ httpTest("admin dashboard low-stock panel and order timeline render for a safe t
   assert.match(adminOrderHtml, /Status history/);
   assert.match(adminOrderHtml, /Payment/);
   assert.match(adminOrderHtml, /unpaid/);
+});
+
+httpTest("historical order pages keep snapshots and avoid broken product links", async () => {
+  const suffix = randomBytes(4).toString("hex");
+  const now = new Date();
+  const product = {
+    _id: new ObjectId(),
+    name: `Historical Fixture ${suffix}`,
+    slug: `historical-fixture-${suffix}`,
+    sku: `HIST-${suffix}`,
+    summary: "Historical fixture",
+    description: "Historical fixture",
+    highlights: [],
+    tags: [],
+    priceInCents: 2500,
+    compareAtPriceInCents: null,
+    categoryId: new ObjectId(),
+    images: [],
+    stock: 10,
+    badge: null,
+    featured: false,
+    active: true,
+    ratingAverage: 0,
+    ratingCount: 0,
+    createdAt: now,
+    updatedAt: now,
+  };
+  await collections.productsCollection.insertOne(product);
+  await collections.cartsCollection.deleteOne({ userId: customer.user.id });
+  await seedCart(customer.user.id, [[product._id, 2]]);
+
+  const order = await orders.createOrder(customer.user, {
+    shipping: {
+      fullName: "HTTP Test Buyer",
+      line1: "1 Test Street",
+      line2: "",
+      city: "Testville",
+      state: "Test State",
+      postalCode: "12345",
+      country: "Testland",
+      phone: "",
+    },
+    checkoutKey: newCheckoutKey(),
+  });
+
+  await collections.productsCollection.updateOne(
+    { _id: product._id },
+    {
+      $set: {
+        priceInCents: 9900,
+        slug: "historical-http-new-slug",
+        updatedAt: new Date(),
+      },
+    },
+  );
+
+  const afterChange = await get(
+    `/account/orders/${order.id}`,
+    customer.cookie,
+  );
+  assert.equal(afterChange.status, 200);
+  const afterChangeHtml = await afterChange.text();
+  assert.ok(afterChangeHtml.includes(product.name));
+  assert.ok(afterChangeHtml.includes("$25.00"));
+  assert.ok(afterChangeHtml.includes("/shop/historical-http-new-slug"));
+
+  await collections.productsCollection.updateOne(
+    { _id: product._id },
+    { $set: { active: false, updatedAt: new Date() } },
+  );
+
+  const afterDeactivation = await get(
+    `/account/orders/${order.id}`,
+    customer.cookie,
+  );
+  assert.equal(afterDeactivation.status, 200);
+  const afterDeactivationHtml = await afterDeactivation.text();
+  assert.ok(afterDeactivationHtml.includes(product.name));
+  assert.ok(afterDeactivationHtml.includes("$25.00"));
+  assert.ok(!afterDeactivationHtml.includes("/shop/historical-http-new-slug"));
 });

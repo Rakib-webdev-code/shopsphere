@@ -8,6 +8,7 @@ import type {
   OrderDoc,
   ProductDoc,
   ReviewDoc,
+  StockAdjustmentDoc,
   UserDoc,
   WishlistDoc,
 } from "@/lib/db/types";
@@ -30,6 +31,8 @@ export const reviewsCollection: Collection<ReviewDoc> =
   db.collection<ReviewDoc>("reviews");
 export const couponsCollection: Collection<CouponDoc> =
   db.collection<CouponDoc>("coupons");
+export const inventoryAdjustmentsCollection: Collection<StockAdjustmentDoc> =
+  db.collection<StockAdjustmentDoc>("inventoryAdjustments");
 
 /**
  * Called by the explicit `npm run db:init` script (and the seed script).
@@ -95,6 +98,17 @@ export async function ensureCatalogIndexes() {
         unique: true,
         partialFilterExpression: { checkoutKey: { $type: "string" } },
       },
+      {
+        key: { inventoryState: 1, updatedAt: 1 },
+        name: "orders_inventory_state_updated_idx",
+      },
+    ]),
+    inventoryAdjustmentsCollection.createIndexes([
+      {
+        key: { productId: 1, createdAt: -1 },
+        name: "inventory_adjustments_product_created_idx",
+      },
+      { key: { createdAt: -1 }, name: "inventory_adjustments_created_idx" },
     ]),
     reviewsCollection.createIndexes([
       {

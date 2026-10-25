@@ -16,7 +16,7 @@ export default function NotFound() {
           404
         </p>
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-          This page is out of stock
+          We couldn&apos;t find that page.
         </h1>
         <p className="mt-3 max-w-xl text-base leading-7 text-muted">
           The page you are looking for does not exist or may have moved. The

@@ -97,7 +97,9 @@ export function AdminProductForm({
         compareAtPriceInCents,
         categoryId: String(data.get("categoryId") ?? ""),
         images: lines(data.get("images")),
-        stock: Number(data.get("stock") ?? 0),
+        // Existing products manage stock through the guarded inventory
+        // endpoint. Only creation may send an initial stock value.
+        ...(product ? {} : { stock: Number(data.get("stock") ?? 0) }),
         badge: String(data.get("badge") ?? "") || null,
         featured: data.get("featured") === "on",
         active: data.get("active") === "on",
@@ -257,8 +259,18 @@ export function AdminProductForm({
 
       <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
         <h2 className="text-lg font-semibold text-foreground">
-          Pricing and inventory
+          {product ? "Pricing" : "Pricing and inventory"}
         </h2>
+        {product && (
+          <p className="mt-2 text-sm text-muted">
+            Stock is managed from{" "}
+            <Link href="/admin/inventory" className="font-semibold text-accent hover:text-accent-strong">
+              Inventory
+            </Link>{" "}
+            with a stale-data check and an audit trail, so saving product details
+            cannot overwrite live stock.
+          </p>
+        )}
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <label htmlFor="price" className={labelClass}>
@@ -290,21 +302,26 @@ export function AdminProductForm({
               className={inputClass}
             />
           </div>
-          <div>
-            <label htmlFor="stock" className={labelClass}>
-              Stock
-            </label>
-            <input
-              id="stock"
-              name="stock"
-              type="number"
-              min="0"
-              step="1"
-              defaultValue={product?.stock ?? 20}
-              required
-              className={inputClass}
-            />
-          </div>
+          {!product && (
+            <div>
+              <label htmlFor="stock" className={labelClass}>
+                Initial stock
+              </label>
+              <input
+                id="stock"
+                name="stock"
+                type="number"
+                min="0"
+                step="1"
+                defaultValue={20}
+                required
+                className={inputClass}
+              />
+              <p className="mt-1.5 text-xs text-muted-soft">
+                Later changes must be made in Inventory.
+              </p>
+            </div>
+          )}
           <div>
             <label htmlFor="badge" className={labelClass}>
               Badge

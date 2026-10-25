@@ -35,6 +35,7 @@ export async function getAdminStats(): Promise<AdminStats> {
     valueResult,
     customerCount,
     recentOrders,
+    unresolvedInventory,
   ] = await Promise.all([
     productsCollection.countDocuments({ active: true }),
     productsCollection.countDocuments({ active: false }),
@@ -60,7 +61,16 @@ export async function getAdminStats(): Promise<AdminStats> {
       .sort({ createdAt: -1 })
       .limit(5)
       .toArray(),
+    ordersCollection.countDocuments({
+      inventoryState: { $in: ["reserving", "releasing"] },
+    }),
   ]);
+
+  if (unresolvedInventory > 0) {
+    console.error(
+      `[admin] ${unresolvedInventory} order(s) still have unresolved inventory reservations. Automatic recovery will keep retrying; inspect orders with inventoryState "reserving" or "releasing" if this persists.`,
+    );
+  }
 
   return {
     activeProducts,

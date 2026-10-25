@@ -1,4 +1,8 @@
-import { productsCollection, wishlistsCollection } from "@/lib/db/collections";
+import {
+  categoriesCollection,
+  productsCollection,
+  wishlistsCollection,
+} from "@/lib/db/collections";
 import { conflict, notFound } from "@/lib/errors";
 import type { Wishlist } from "@/lib/types";
 import { serializeProducts } from "@/lib/services/products";
@@ -20,9 +24,27 @@ export async function getWishlistForUser(userId: string): Promise<Wishlist> {
   const productMap = new Map(
     products.map((product) => [product._id.toHexString(), product]),
   );
+  const inactiveCategories =
+    products.length === 0
+      ? []
+      : await categoriesCollection
+          .find(
+            {
+              _id: { $in: products.map((product) => product.categoryId) },
+              active: false,
+            },
+            { projection: { _id: 1 } },
+          )
+          .toArray();
+  const inactiveCategoryIds = new Set(
+    inactiveCategories.map((category) => category._id.toHexString()),
+  );
   const ordered = wishlist.productIds
     .map((id) => productMap.get(id.toHexString()))
-    .filter((product): product is NonNullable<typeof product> => Boolean(product));
+    .filter((product): product is NonNullable<typeof product> => Boolean(product))
+    .filter(
+      (product) => !inactiveCategoryIds.has(product.categoryId.toHexString()),
+    );
 
   return { products: await serializeProducts(ordered) };
 }
@@ -40,6 +62,15 @@ export async function addToWishlist(
 
   if (!product) {
     throw notFound("Product not found.");
+  }
+
+  const category = await categoriesCollection.findOne(
+    { _id: product.categoryId },
+    { projection: { active: 1 } },
+  );
+
+  if (category && !category.active) {
+    throw conflict("This product category is no longer available.");
   }
 
   const now = new Date();

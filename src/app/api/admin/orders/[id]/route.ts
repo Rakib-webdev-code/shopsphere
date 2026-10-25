@@ -2,6 +2,7 @@ import { jsonResponse, runApi } from "@/lib/api";
 import { requireAdmin } from "@/lib/auth/session";
 import {
   getOrderForAdmin,
+  resolveOrderReconciliation,
   updateOrderStatus,
 } from "@/lib/services/orders";
 import { asRecord, readJsonBody } from "@/lib/validation";
@@ -22,6 +23,19 @@ export async function PATCH(request: Request, context: RouteParams) {
     const admin = await requireAdmin();
     const { id } = await context.params;
     const body = asRecord(await readJsonBody(request));
+
+    if (
+      body.reconciliationAction === "retry" ||
+      body.reconciliationAction === "force-release"
+    ) {
+      const order = await resolveOrderReconciliation(
+        id,
+        admin,
+        body.reconciliationAction,
+      );
+      return jsonResponse({ order });
+    }
+
     const order = await updateOrderStatus(id, body.status, admin.id);
     return jsonResponse({ order });
   });

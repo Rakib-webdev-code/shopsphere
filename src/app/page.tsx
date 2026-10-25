@@ -196,6 +196,53 @@ export default function Home() {
         </div>
       </section>
 
+      <section
+        aria-labelledby="assistant-heading"
+        className="border-t border-border bg-surface py-16"
+      >
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-8 rounded-2xl border border-accent-border bg-accent-soft p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+            <div className="max-w-2xl">
+              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+                <SparklesIcon className="h-4 w-4" />
+                Smart shopping assistant
+              </p>
+              <h2
+                id="assistant-heading"
+                className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+              >
+                Describe the thing. We will find the shelf.
+              </h2>
+              <p className="mt-4 text-base leading-7 text-muted-strong">
+                Ask for a gift under a budget, compare two products, or look for
+                an alternative to something that is sold out. Every result is
+                checked against the live catalog price and stock before it is
+                shown.
+              </p>
+              <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium text-muted">
+                {[
+                  "No invented products",
+                  "Budget-aware suggestions",
+                  "Real stock counts",
+                ].map((item) => (
+                  <li key={item} className="inline-flex items-center gap-1.5">
+                    <CheckIcon className="h-3.5 w-3.5 text-accent-bright" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Link
+              href="/assistant"
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-accent-solid px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-solid-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            >
+              Ask the assistant
+              <ArrowRightIcon />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section aria-labelledby="workspace-heading" className="pb-16">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 px-6 py-12 text-white dark:border-zinc-700 sm:px-10 lg:px-14">

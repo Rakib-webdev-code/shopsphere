@@ -34,7 +34,12 @@ export function assertIsolatedDatabase(databaseName) {
   }
 }
 
-export async function dropTestDatabase(db) {
+export async function dropTestDatabase(db, expectedDatabaseName) {
   assertIsolatedDatabase(db.databaseName);
+  if (!expectedDatabaseName || db.databaseName !== expectedDatabaseName) {
+    throw new Error(
+      `Refusing to drop unexpected test database "${db.databaseName}".`,
+    );
+  }
   await db.dropDatabase();
 }

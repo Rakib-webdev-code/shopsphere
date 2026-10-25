@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
+import { AdminOrderReconciliation } from "@/components/admin-order-reconciliation";
 import { AdminOrderStatusForm } from "@/components/admin-order-status-form";
 import { OrderStatusTimeline } from "@/components/order-status-timeline";
 import { MediaThumb } from "@/components/product-media";
@@ -11,6 +12,7 @@ import { requireAdminPage } from "@/lib/auth/session";
 import { ApiError } from "@/lib/errors";
 import { formatPrice } from "@/lib/format";
 import { getOrderForAdmin } from "@/lib/services/orders";
+import { getActiveProductLinks } from "@/lib/services/products";
 
 export const metadata: Metadata = { title: "Order details" };
 
@@ -47,6 +49,10 @@ async function AdminOrderContent({
     );
   }
 
+  const productLinks = await getActiveProductLinks(
+    order.items.map((item) => item.productId),
+  );
+
   return (
     <div>
       <Link
@@ -80,41 +86,81 @@ async function AdminOrderContent({
           <span className="rounded-full bg-surface-subtle px-3 py-1 text-xs font-semibold text-muted">
             Inventory {order.inventoryState}
           </span>
+          {order.reconciliationRequired && (
+            <span className="rounded-full bg-danger-soft px-3 py-1 text-xs font-semibold text-danger ring-1 ring-danger-border">
+              Reconciliation Required
+            </span>
+          )}
         </div>
       </div>
+
+      {order.reconciliationRequired && (
+        <div className="mt-4">
+          <Alert tone="error">
+            <span className="font-semibold">Inventory Reconciliation Required:</span>{" "}
+            {order.reconciliationError ??
+              "Stock or coupon could not be released automatically (e.g. referenced entity was deleted). Manual resolution is required."}
+          </Alert>
+        </div>
+      )}
+
+      {order.reconciliationRequired && (
+        <section className="mt-4 rounded-2xl border border-danger-border bg-surface p-5 sm:p-6">
+          <h3 className="text-lg font-semibold text-foreground">
+            Resolve inventory reconciliation
+          </h3>
+          <p className="mt-1.5 mb-4 max-w-3xl text-sm leading-6 text-muted">
+            Repair the missing product or coupon first, then retry recovery. If
+            the data cannot be repaired, a force-release fences any surviving
+            inventory documents and records who resolved the order. Check stock
+            manually afterwards.
+          </p>
+          <AdminOrderReconciliation order={order} />
+        </section>
+      )}
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
         <div className="space-y-6">
           <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
             <h3 className="text-lg font-semibold text-foreground">Items</h3>
             <ul className="mt-4 divide-y divide-border">
-              {order.items.map((item) => (
-                <li
-                  key={item.productId}
-                  className="flex flex-col gap-3 py-4 first:pt-0 sm:flex-row sm:items-center"
-                >
-                  <MediaThumb
-                    src={item.image}
-                    alt={item.name}
-                    variant="thumb"
-                    className="aspect-square w-16 shrink-0 rounded-xl"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <Link
-                      href={`/shop/${item.slug}`}
-                      className="text-sm font-semibold text-foreground hover:text-accent"
-                    >
-                      {item.name}
-                    </Link>
-                    <p className="mt-0.5 text-xs text-muted-soft">
-                      {formatPrice(item.priceInCents)} × {item.quantity}
+              {order.items.map((item) => {
+                const href = productLinks.get(item.productId);
+
+                return (
+                  <li
+                    key={item.productId}
+                    className="flex flex-col gap-3 py-4 first:pt-0 sm:flex-row sm:items-center"
+                  >
+                    <MediaThumb
+                      src={item.image}
+                      alt={item.name}
+                      variant="thumb"
+                      className="aspect-square w-16 shrink-0 rounded-xl"
+                    />
+                    <div className="min-w-0 flex-1">
+                      {href ? (
+                        <Link
+                          href={href}
+                          className="text-sm font-semibold text-foreground hover:text-accent"
+                        >
+                          {item.name}
+                        </Link>
+                      ) : (
+                        <span className="text-sm font-semibold text-foreground">
+                          {item.name}
+                        </span>
+                      )}
+                      <p className="mt-0.5 text-xs text-muted-soft">
+                        {formatPrice(item.priceInCents)} × {item.quantity}
+                      </p>
+                    </div>
+                    <p className="text-sm font-semibold text-foreground">
+                      {formatPrice(item.lineTotalCents)}
                     </p>
-                  </div>
-                  <p className="text-sm font-semibold text-foreground">
-                    {formatPrice(item.lineTotalCents)}
-                  </p>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
             </ul>
           </section>
 

@@ -1,11 +1,24 @@
 import { ObjectId, type Filter, type Sort } from "mongodb";
 import {
   categoriesCollection,
+  inventoryAdjustmentsCollection,
   productsCollection,
   reviewsCollection,
 } from "@/lib/db/collections";
-import type { CategoryDoc, ProductDoc } from "@/lib/db/types";
-import { conflict, notFound, ValidationError } from "@/lib/errors";
+import type {
+  CategoryDoc,
+  ProductDoc,
+  StockAdjustmentDoc,
+} from "@/lib/db/types";
+import {
+  ApiError,
+  conflict,
+  forbidden,
+  notFound,
+  ValidationError,
+} from "@/lib/errors";
+import type { CurrentUser } from "@/lib/auth/session";
+import { runRequiredTransaction } from "@/lib/db/transactions";
 import { PRODUCTS_PER_PAGE } from "@/lib/constants";
 import type {
   Product,
@@ -114,6 +127,84 @@ async function getCategoriesById(ids: ProductDoc["categoryId"][]) {
   return new Map(categories.map((category) => [category._id.toHexString(), category]));
 }
 
+/**
+ * Storefront reads exclude products in inactive categories even if a racing
+ * write left `product.active` true. This is the read-side half of the catalog
+ * invariant; the write-side repair and post-deactivation sweep keep the data
+ * consistent, but a request can still land in the tiny window between them.
+ */
+async function getActiveCategoryIds(): Promise<ObjectId[]> {
+  const categories = await categoriesCollection
+    .find({ active: true }, { projection: { _id: 1 } })
+    .toArray();
+
+  return categories.map((category) => category._id);
+}
+
+function categoryConflict(
+  message = "The category was deactivated while saving. Refresh and try again.",
+) {
+  return new ApiError(409, message, "CATALOG_CONFLICT");
+}
+
+/**
+ * Re-reads the category after a product write. Deactivation can race with the
+ * pre-write check, so the write is only reported as successful when the
+ * category is still active.
+ *
+ * The repair is conditional on `updatedAt` matching the document this request
+ * wrote: a newer intentional admin edit wins, and that edit performs its own
+ * post-write verification.
+ */
+async function verifyProductCategory(
+  product: ProductDoc,
+  writtenUpdatedAt: Date,
+): Promise<void> {
+  if (!product.active) {
+    return;
+  }
+
+  let category: CategoryDoc | null;
+
+  try {
+    category = await categoriesCollection.findOne({ _id: product.categoryId });
+  } catch (error) {
+    // The category state is unknown. Fail closed by taking our own write out
+    // of the storefront rather than risking a purchasable product in an
+    // inactive category.
+    await productsCollection
+      .updateOne(
+        {
+          _id: product._id,
+          active: true,
+          updatedAt: writtenUpdatedAt,
+        },
+        { $set: { active: false, updatedAt: new Date() } },
+      )
+      .catch(() => undefined);
+    throw error;
+  }
+
+  if (!category || category.active) {
+    return;
+  }
+
+  const repaired = await productsCollection.updateOne(
+    { _id: product._id, active: true, updatedAt: writtenUpdatedAt },
+    { $set: { active: false, updatedAt: new Date() } },
+  );
+
+  if (repaired.modifiedCount !== 1) {
+    // A newer write superseded this one. It owns its own verification, but
+    // this request must not report a stale success.
+    throw categoryConflict();
+  }
+
+  throw categoryConflict(
+    "The category was deactivated while saving. The product was left inactive; select an active category and try again.",
+  );
+}
+
 export function normalizeProductFilters(input: ProductQueryInput): ProductFilters {
   const query = (input.q ?? "").trim();
 
@@ -169,6 +260,9 @@ export async function listProducts(
 ): Promise<ProductListResult> {
   const filters = normalizeProductFilters(query);
   const filter: Filter<ProductDoc> = {};
+  const activeCategoryIds = query.includeInactive
+    ? null
+    : await getActiveCategoryIds();
 
   if (!query.includeInactive) {
     filter.active = true;
@@ -202,6 +296,11 @@ export async function listProducts(
     } else {
       filter.categoryId = category._id;
     }
+  } else if (activeCategoryIds) {
+    // No explicit category filter: never list products from inactive
+    // categories. Products with a dangling categoryId are also excluded,
+    // which is the safe choice for a storefront.
+    filter.categoryId = { $in: activeCategoryIds };
   }
 
   if (filters.minPriceCents !== null) {
@@ -280,6 +379,10 @@ export async function getProductBySlug(
     _id: product.categoryId,
   });
 
+  if (!options.includeInactive && category && !category.active) {
+    return null;
+  }
+
   return serializeProduct(product, category);
 }
 
@@ -305,7 +408,54 @@ export async function getProductById(
     _id: product.categoryId,
   });
 
+  if (!options.includeInactive && category && !category.active) {
+    return null;
+  }
+
   return serializeProduct(product, category);
+}
+
+export async function getActiveProductLinks(
+  productIds: string[],
+): Promise<Map<string, string>> {
+  const ids: ObjectId[] = [];
+
+  for (const id of productIds) {
+    try {
+      ids.push(parseObjectId(id, "Product ID"));
+    } catch {
+      // Invalid historical IDs simply render without a product link.
+    }
+  }
+
+  if (ids.length === 0) {
+    return new Map();
+  }
+
+  const products = await productsCollection
+    .find(
+      { _id: { $in: ids }, active: true },
+      { projection: { slug: 1, categoryId: 1 } },
+    )
+    .toArray();
+  const categories = await getCategoriesById(
+    products.map((product) => product.categoryId),
+  );
+
+  return new Map(
+    products
+      // Historical orders keep their snapshot. A link is offered only while
+      // the live product and its category are still purchasable; missing
+      // categories are tolerated for legacy data.
+      .filter((product) => {
+        const category = categories.get(product.categoryId.toHexString());
+        return !category || category.active;
+      })
+      .map((product) => [
+        product._id.toHexString(),
+        `/shop/${product.slug}`,
+      ]),
+  );
 }
 
 export async function getRelatedProducts(
@@ -320,26 +470,28 @@ export async function getRelatedProducts(
     return result.products.filter((entry) => entry.id !== product.id).slice(0, limit);
   }
 
-  const sameCategory = await productsCollection
-    .find({
-      _id: { $ne: parseObjectId(product.id, "Product ID") },
-      categoryId: parseObjectId(product.category.id, "Category ID"),
-      active: true,
-    })
-    .sort({ featured: -1, ratingAverage: -1, createdAt: -1 })
-    .limit(limit)
-    .toArray();
+  const categoryId = parseObjectId(product.category.id, "Category ID");
+  const category = await categoriesCollection.findOne({ _id: categoryId });
+  const sameCategoryActive = Boolean(category?.active);
+  const sameCategory = sameCategoryActive
+    ? await productsCollection
+        .find({
+          _id: { $ne: parseObjectId(product.id, "Product ID") },
+          categoryId,
+          active: true,
+        })
+        .sort({ featured: -1, ratingAverage: -1, createdAt: -1 })
+        .limit(limit)
+        .toArray()
+    : [];
 
   if (sameCategory.length >= limit) {
-    const category = await categoriesCollection.findOne({
-      _id: parseObjectId(product.category.id, "Category ID"),
-    });
-
     return sameCategory.map((item) =>
       serializeProduct(item, category ?? null),
     );
   }
 
+  const activeCategoryIds = await getActiveCategoryIds();
   const existingIds = sameCategory.map((item) => item._id);
   const fill = await productsCollection
     .find({
@@ -349,6 +501,7 @@ export async function getRelatedProducts(
           ...existingIds,
         ],
       },
+      categoryId: { $in: activeCategoryIds },
       active: true,
     })
     .sort({ featured: -1, ratingAverage: -1, createdAt: -1 })
@@ -430,6 +583,16 @@ async function parseProductFields(
     throw new ValidationError("The selected category does not exist.");
   }
 
+  const active = has(raw, "active")
+    ? readBoolean(raw.active, "Active")
+    : (existing?.active ?? true);
+
+  if (active && !category.active) {
+    throw new ValidationError(
+      "Cannot activate a product in an inactive category.",
+    );
+  }
+
   const badge = has(raw, "badge")
     ? raw.badge === null || raw.badge === ""
       ? null
@@ -477,16 +640,17 @@ async function parseProductFields(
     images: has(raw, "images")
       ? validateImageUrls(raw.images)
       : (existing?.images ?? []),
-    stock: has(raw, "stock")
-      ? readInt(raw.stock, { label: "Stock", min: 0, max: 1_000_000 })
-      : requireExisting(existing?.stock, "Stock"),
+    // Stock is only accepted when a product is created. Updates preserve the
+    // current value here and omit it from the `$set` below; manual changes must
+    // go through the guarded inventory adjustment service.
+    stock: existing
+      ? existing.stock
+      : readInt(raw.stock, { label: "Stock", min: 0, max: 1_000_000 }),
     badge,
     featured: has(raw, "featured")
       ? readBoolean(raw.featured, "Featured")
       : Boolean(existing?.featured),
-    active: has(raw, "active")
-      ? readBoolean(raw.active, "Active")
-      : (existing?.active ?? true),
+    active,
   };
 }
 
@@ -498,12 +662,25 @@ function requireExisting<T>(value: T | undefined, label: string): T {
   return value;
 }
 
-export async function createProduct(raw: unknown): Promise<Product> {
+export async function createProduct(
+  raw: unknown,
+  admin: CurrentUser,
+): Promise<Product> {
+  if (admin.role !== "admin") {
+    throw forbidden("Administrator access is required.");
+  }
+
   const fields = await parseProductFields(raw);
   const now = new Date();
+  const _id = new ObjectId();
+  const category = await categoriesCollection.findOne({ _id: fields.categoryId });
+
+  if (!category) {
+    throw new ValidationError("The selected category does not exist.");
+  }
 
   const document: ProductDoc = {
-    _id: new ObjectId(),
+    _id,
     ...fields,
     ratingAverage: 0,
     ratingCount: 0,
@@ -511,11 +688,32 @@ export async function createProduct(raw: unknown): Promise<Product> {
     updatedAt: now,
   };
 
-  await productsCollection.insertOne(document);
+  if (fields.stock > 0) {
+    const adjustment: StockAdjustmentDoc = {
+      _id: new ObjectId(),
+      productId: _id,
+      adminUserId: admin.id,
+      kind: "initial",
+      delta: fields.stock,
+      beforeStock: 0,
+      afterStock: fields.stock,
+      reason: "Initial stock on product creation",
+      at: now,
+    };
 
-  const category = await categoriesCollection.findOne({
-    _id: document.categoryId,
-  });
+    await runRequiredTransaction(async (session) => {
+      await productsCollection.insertOne(document, { session });
+      await inventoryAdjustmentsCollection.insertOne(adjustment, { session });
+      return document;
+    });
+  } else {
+    // Zero stock is not a stock change, so no initial adjustment is recorded.
+    await productsCollection.insertOne(document);
+  }
+
+  // The pre-write category check can lose a race with deactivation. Verify the
+  // category after the write and repair/409 rather than reporting success.
+  await verifyProductCategory(document, now);
 
   return serializeProduct(document, category);
 }
@@ -532,19 +730,27 @@ export async function updateProduct(
   }
 
   const fields = await parseProductFields(raw, existing);
+  const { stock: ignoredStock, ...editableFields } = fields;
+  void ignoredStock;
   const updatedAt = new Date();
 
+  // `stock` is deliberately excluded. Writing it here would overwrite a
+  // concurrent checkout/reservation with the value read before this request.
   await productsCollection.updateOne(
     { _id: productId },
-    { $set: { ...fields, updatedAt } },
+    { $set: { ...editableFields, updatedAt } },
   );
 
   const updated = await productsCollection.findOne({ _id: productId });
-  const category = updated
-    ? await categoriesCollection.findOne({ _id: updated.categoryId })
-    : null;
+  const current = updated ?? existing;
 
-  return serializeProduct(updated ?? existing, category);
+  await verifyProductCategory(current, updatedAt);
+
+  const category = await categoriesCollection.findOne({
+    _id: current.categoryId,
+  });
+
+  return serializeProduct(current, category);
 }
 
 export async function setProductActive(

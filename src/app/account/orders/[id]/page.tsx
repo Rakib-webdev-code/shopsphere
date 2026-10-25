@@ -10,6 +10,7 @@ import { getCurrentUser } from "@/lib/auth/session";
 import { ApiError } from "@/lib/errors";
 import { formatPrice } from "@/lib/format";
 import { getOrderForUser } from "@/lib/services/orders";
+import { getActiveProductLinks } from "@/lib/services/products";
 
 type OrderDetailPageProps = PageProps<"/account/orders/[id]">;
 
@@ -55,6 +56,10 @@ async function OrderDetail({
       </Alert>
     );
   }
+
+  const productLinks = await getActiveProductLinks(
+    order.items.map((item) => item.productId),
+  );
 
   return (
     <div>
@@ -119,35 +124,56 @@ async function OrderDetail({
         <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
           <h2 className="text-lg font-semibold text-foreground">Items</h2>
           <ul className="mt-4 divide-y divide-border">
-            {order.items.map((item) => (
-              <li
-                key={item.productId}
-                className="flex flex-col gap-3 py-4 first:pt-0 sm:flex-row sm:items-center"
-              >
-                <Link href={`/shop/${item.slug}`} className="w-full shrink-0 sm:w-20">
-                  <MediaThumb
-                    src={item.image}
-                    alt={item.name}
-                    variant="thumb"
-                    className="aspect-square w-20 rounded-xl"
-                  />
-                </Link>
-                <div className="min-w-0 flex-1">
-                  <Link
-                    href={`/shop/${item.slug}`}
-                    className="text-sm font-semibold text-foreground hover:text-accent"
-                  >
-                    {item.name}
-                  </Link>
-                  <p className="mt-0.5 text-xs text-muted-soft">
-                    {formatPrice(item.priceInCents)} × {item.quantity}
+            {order.items.map((item) => {
+              const href = productLinks.get(item.productId);
+
+              return (
+                <li
+                  key={item.productId}
+                  className="flex flex-col gap-3 py-4 first:pt-0 sm:flex-row sm:items-center"
+                >
+                  {href ? (
+                    <Link href={href} className="w-full shrink-0 sm:w-20">
+                      <MediaThumb
+                        src={item.image}
+                        alt={item.name}
+                        variant="thumb"
+                        className="aspect-square w-20 rounded-xl"
+                      />
+                    </Link>
+                  ) : (
+                    <div className="w-full shrink-0 sm:w-20">
+                      <MediaThumb
+                        src={item.image}
+                        alt={item.name}
+                        variant="thumb"
+                        className="aspect-square w-20 rounded-xl"
+                      />
+                    </div>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    {href ? (
+                      <Link
+                        href={href}
+                        className="text-sm font-semibold text-foreground hover:text-accent"
+                      >
+                        {item.name}
+                      </Link>
+                    ) : (
+                      <span className="text-sm font-semibold text-foreground">
+                        {item.name}
+                      </span>
+                    )}
+                    <p className="mt-0.5 text-xs text-muted-soft">
+                      {formatPrice(item.priceInCents)} × {item.quantity}
+                    </p>
+                  </div>
+                  <p className="text-sm font-semibold text-foreground">
+                    {formatPrice(item.lineTotalCents)}
                   </p>
-                </div>
-                <p className="text-sm font-semibold text-foreground">
-                  {formatPrice(item.lineTotalCents)}
-                </p>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </section>
 

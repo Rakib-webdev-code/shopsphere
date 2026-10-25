@@ -4,7 +4,7 @@ import {
   productsCollection,
 } from "@/lib/db/collections";
 import type { CategoryDoc } from "@/lib/db/types";
-import { notFound, ValidationError } from "@/lib/errors";
+import { conflict, notFound, ValidationError } from "@/lib/errors";
 import { PRODUCT_ICONS } from "@/lib/constants";
 import type { Category, ProductIconName } from "@/lib/types";
 import {
@@ -207,10 +207,33 @@ export async function updateCategory(
   const fields = await parseCategoryFields(raw, existing);
   const updatedAt = new Date();
 
-  await categoriesCollection.updateOne(
-    { _id: categoryId },
+  // Category deactivation preserves individual product.active states in the database.
+  // Storefront browsing, product detail lookups, cart serialization, and checkout
+  // lines already guard on category.active, making products unavailable while the
+  // category is inactive without destructively erasing product settings.
+  const filter: Filter<CategoryDoc> = { _id: categoryId };
+
+  if (!fields.active) {
+    filter.$or = [
+      { checkoutReservations: { $exists: false } },
+      { checkoutReservations: { $size: 0 } },
+    ];
+  }
+
+  const result = await categoriesCollection.updateOne(
+    filter,
     { $set: { ...fields, updatedAt } },
   );
+
+  if (!result.matchedCount && !fields.active) {
+    const current = await categoriesCollection.findOne({ _id: categoryId });
+
+    if (current?.active && (current.checkoutReservations?.length ?? 0) > 0) {
+      throw conflict(
+        "This category has a checkout in progress. Try deactivating it again after checkout finishes.",
+      );
+    }
+  }
 
   const updated = await categoriesCollection.findOne({ _id: categoryId });
   const productCount = await productsCollection.countDocuments({

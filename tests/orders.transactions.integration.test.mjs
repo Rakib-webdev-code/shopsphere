@@ -17,6 +17,7 @@ let db;
 let mongoClient;
 let collections;
 let orders;
+let cart;
 
 const SHIPPING = {
   fullName: "Transaction Test Buyer",
@@ -37,6 +38,7 @@ if (hasMongo) {
   assert.equal(db.databaseName, testDbName);
   collections = await import("../src/lib/db/collections.ts");
   orders = await import("../src/lib/services/orders.ts");
+  cart = await import("../src/lib/services/cart.ts");
   const transactions = await import("../src/lib/db/transactions.ts");
   transactionSupport = await transactions.supportsTransactions();
 }
@@ -132,7 +134,7 @@ if (hasMongo) {
   });
 
   after(async () => {
-    await dropTestDatabase(db);
+    await dropTestDatabase(db, testDbName);
     await mongoClient.close();
   });
 }
@@ -182,4 +184,56 @@ txnTest("transactional checkout is idempotent for a repeated checkout key", asyn
   assert.equal(second.id, first.id);
   assert.equal(await collections.ordersCollection.countDocuments({}), 1);
   assert.equal((await collections.productsCollection.findOne({ _id: product._id })).stock, 8);
+});
+
+txnTest("transactional checkout aborts when the cart changes mid-checkout", async () => {
+  const buyer = user();
+  const [purchased, added] = await Promise.all([seedProduct(10), seedProduct(10)]);
+  await seedCart(buyer.id, purchased._id, 1);
+  const originalInsert = collections.ordersCollection.insertOne.bind(
+    collections.ordersCollection,
+  );
+  let triggered = false;
+
+  collections.ordersCollection.insertOne = async (document, options) => {
+    if (!triggered) {
+      triggered = true;
+      await cart.addCartItem(buyer.id, {
+        productId: added._id.toHexString(),
+        quantity: 1,
+      });
+    }
+
+    return originalInsert(document, options);
+  };
+
+  try {
+    await assert.rejects(
+      orders.createOrder(buyer, { shipping: SHIPPING, checkoutKey: key() }),
+      (error) => {
+        assert.equal(error.status, 409);
+        return true;
+      },
+    );
+  } finally {
+    collections.ordersCollection.insertOne = originalInsert;
+  }
+
+  assert.equal(await collections.ordersCollection.countDocuments({}), 0);
+  assert.equal(
+    (await collections.productsCollection.findOne({ _id: purchased._id })).stock,
+    10,
+  );
+  assert.equal(
+    (await collections.productsCollection.findOne({ _id: added._id })).stock,
+    10,
+  );
+  const rawCart = await collections.cartsCollection.findOne({
+    userId: buyer.id,
+  });
+  const quantities = new Map(
+    rawCart.items.map((item) => [item.productId.toHexString(), item.quantity]),
+  );
+  assert.equal(quantities.get(purchased._id.toHexString()), 1);
+  assert.equal(quantities.get(added._id.toHexString()), 1);
 });

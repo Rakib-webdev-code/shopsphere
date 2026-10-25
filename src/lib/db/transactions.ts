@@ -1,4 +1,11 @@
+import {
+  MongoNetworkError,
+  MongoServerError,
+  MongoServerSelectionError,
+  type ClientSession,
+} from "mongodb";
 import { db, mongoClient } from "@/lib/mongodb";
+import { ApiError } from "@/lib/errors";
 
 let transactionSupport: boolean | null = null;
 
@@ -22,6 +29,22 @@ function forcedTransactionSupport(): boolean | null {
   return null;
 }
 
+function transactionsUnavailable() {
+  return new ApiError(
+    503,
+    "This operation requires MongoDB transactions, which are currently unavailable.",
+    "TRANSACTIONS_UNAVAILABLE",
+  );
+}
+
+function isRuntimeTransactionUnavailable(error: unknown) {
+  return (
+    (error instanceof MongoServerError && error.code === 20) ||
+    error instanceof MongoNetworkError ||
+    error instanceof MongoServerSelectionError
+  );
+}
+
 export async function supportsTransactions(): Promise<boolean> {
   if (transactionSupport !== null) {
     return transactionSupport;
@@ -34,22 +57,26 @@ export async function supportsTransactions(): Promise<boolean> {
     return forced;
   }
 
+  let hello: { setName?: string; msg?: string };
+
   try {
-    const hello = (await db.admin().command({ hello: 1 })) as {
+    hello = (await db.admin().command({ hello: 1 })) as {
       setName?: string;
       msg?: string;
     };
-
-    transactionSupport = Boolean(hello.setName || hello.msg === "isdbgrid");
   } catch {
-    transactionSupport = false;
+    // A transient detection failure must not permanently disable transactions
+    // for the lifetime of the process. Fail closed for this request and retry
+    // detection on the next call.
+    return false;
   }
 
+  transactionSupport = Boolean(hello.setName || hello.msg === "isdbgrid");
   return transactionSupport;
 }
 
 export async function runOptionalTransaction<T>(
-  work: (session?: import("mongodb").ClientSession) => Promise<T>,
+  work: (session?: ClientSession) => Promise<T>,
 ): Promise<T> {
   if (!(await supportsTransactions())) {
     return work();
@@ -75,6 +102,57 @@ export async function runOptionalTransaction<T>(
     }
 
     return result;
+  } finally {
+    await session.endSession();
+  }
+}
+
+/**
+ * Runs work in a transaction or fails before any write when transactions are
+ * unavailable. Unlike `runOptionalTransaction`, this never falls back to
+ * non-transactional writes.
+ */
+export async function runRequiredTransaction<T>(
+  work: (session: ClientSession) => Promise<T>,
+): Promise<T> {
+  if (!(await supportsTransactions())) {
+    throw transactionsUnavailable();
+  }
+
+  let session: ClientSession;
+
+  try {
+    session = mongoClient.startSession();
+  } catch {
+    throw transactionsUnavailable();
+  }
+
+  try {
+    let result: T | undefined;
+
+    try {
+      await session.withTransaction(
+        async () => {
+          result = await work(session);
+        },
+        {
+          readConcern: { level: "snapshot" },
+          writeConcern: { w: "majority" },
+        },
+      );
+    } catch (error) {
+      if (isRuntimeTransactionUnavailable(error)) {
+        if (error instanceof MongoServerError && error.code === 20) {
+          transactionSupport = false;
+        }
+
+        throw transactionsUnavailable();
+      }
+
+      throw error;
+    }
+
+    return result as T;
   } finally {
     await session.endSession();
   }

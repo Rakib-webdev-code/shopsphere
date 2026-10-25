@@ -11,6 +11,7 @@ import {
   primaryButtonClass,
 } from "@/components/ui";
 import { apiRequest } from "@/lib/api-client";
+import { isAllowedRemoteImageSrc, remoteImageHosts } from "@/lib/remote-image-hosts";
 import type { Profile } from "@/lib/types";
 
 export function ProfileForm({ initialProfile }: { initialProfile: Profile }) {
@@ -26,6 +27,21 @@ export function ProfileForm({ initialProfile }: { initialProfile: Profile }) {
     event.preventDefault();
     setMessage(null);
     setError(null);
+
+    const normalizedImage = image.trim();
+    if (
+      normalizedImage &&
+      normalizedImage !== (initialProfile.image ?? "") &&
+      !isAllowedRemoteImageSrc(normalizedImage)
+    ) {
+      setError(
+        `Use a local image path or HTTPS image from ${remoteImageHosts
+          .map((host) => host.hostname)
+          .join(", ")}.`,
+      );
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -50,7 +66,7 @@ export function ProfileForm({ initialProfile }: { initialProfile: Profile }) {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="flex items-center gap-4">
         <span className="relative inline-flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent-soft text-accent ring-1 ring-accent-border">
-          {image ? (
+          {image.trim() && isAllowedRemoteImageSrc(image.trim()) ? (
             <Image
               src={image}
               alt=""
@@ -129,6 +145,11 @@ export function ProfileForm({ initialProfile }: { initialProfile: Profile }) {
           placeholder="https://example.com/avatar.jpg"
           className={inputClass}
         />
+        <p className="mt-1.5 text-xs text-muted-soft">
+          Use a local image path or HTTPS image from {remoteImageHosts
+            .map((host) => host.hostname)
+            .join(", ")}.
+        </p>
       </div>
 
       {message && <Alert tone="success">{message}</Alert>}

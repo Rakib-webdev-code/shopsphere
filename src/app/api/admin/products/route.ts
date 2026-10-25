@@ -25,9 +25,9 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: Request) {
   return runApi(async () => {
-    await requireAdmin();
+    const admin = await requireAdmin();
     const body = await readJsonBody(request);
-    const product = await createProduct(body);
+    const product = await createProduct(body, admin);
     return jsonResponse({ product }, { status: 201 });
   });
 }

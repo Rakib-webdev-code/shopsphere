@@ -1,0 +1,3980 @@
+{
+  "format": "shopsphere-phase2-catalog-draft-v1",
+  "baseline": {
+    "sourceProducts": 100,
+    "targetTotal": 250,
+    "liveDatabaseCount": null
+  },
+  "categories": [
+    {
+      "slug": "audio",
+      "name": "Audio"
+    },
+    {
+      "slug": "workspace",
+      "name": "Workspace"
+    },
+    {
+      "slug": "home",
+      "name": "Home"
+    },
+    {
+      "slug": "accessories",
+      "name": "Accessories"
+    },
+    {
+      "slug": "outdoor",
+      "name": "Outdoor"
+    },
+    {
+      "slug": "wellness",
+      "name": "Wellness"
+    },
+    {
+      "slug": "electronics",
+      "name": "Electronics"
+    },
+    {
+      "slug": "fashion",
+      "name": "Fashion"
+    },
+    {
+      "slug": "footwear",
+      "name": "Footwear"
+    },
+    {
+      "slug": "kitchen-dining",
+      "name": "Kitchen & Dining"
+    },
+    {
+      "slug": "beauty-personal-care",
+      "name": "Beauty & Personal Care"
+    },
+    {
+      "slug": "sports-fitness",
+      "name": "Sports & Fitness"
+    },
+    {
+      "slug": "books-stationery",
+      "name": "Books & Stationery"
+    },
+    {
+      "slug": "toys-games",
+      "name": "Toys & Games"
+    },
+    {
+      "slug": "grocery-essentials",
+      "name": "Grocery & Essentials"
+    }
+  ],
+  "products": [
+    {
+      "name": "Studio Monitor Headphones",
+      "slug": "studio-monitor-headphones",
+      "sku": "SS-P2-AUDIO-001",
+      "summary": "Studio Monitor Headphones for practical, everyday use in the audio collection.",
+      "description": "Studio Monitor Headphones is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 12900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/studio-monitor-headphones.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Compact USB-C Audio Interface",
+      "slug": "compact-usb-c-audio-interface",
+      "sku": "SS-P2-AUDIO-002",
+      "summary": "Compact USB-C Audio Interface for practical, everyday use in the audio collection.",
+      "description": "Compact USB-C Audio Interface is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 15900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/compact-usb-c-audio-interface.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Bookshelf Speaker Pair",
+      "slug": "bookshelf-speaker-pair",
+      "sku": "SS-P2-AUDIO-003",
+      "summary": "Bookshelf Speaker Pair for practical, everyday use in the audio collection.",
+      "description": "Bookshelf Speaker Pair is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 24900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/bookshelf-speaker-pair.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Portable Bluetooth Radio",
+      "slug": "portable-bluetooth-radio",
+      "sku": "SS-P2-AUDIO-004",
+      "summary": "Portable Bluetooth Radio for practical, everyday use in the audio collection.",
+      "description": "Portable Bluetooth Radio is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 8900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/portable-bluetooth-radio.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Wired In-Ear Monitor Set",
+      "slug": "wired-in-ear-monitor-set",
+      "sku": "SS-P2-AUDIO-005",
+      "summary": "Wired In-Ear Monitor Set for practical, everyday use in the audio collection.",
+      "description": "Wired In-Ear Monitor Set is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/wired-in-ear-monitor-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Desktop Microphone Arm",
+      "slug": "desktop-microphone-arm",
+      "sku": "SS-P2-AUDIO-006",
+      "summary": "Desktop Microphone Arm for practical, everyday use in the audio collection.",
+      "description": "Desktop Microphone Arm is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/desktop-microphone-arm.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Bluetooth Turntable",
+      "slug": "bluetooth-turntable",
+      "sku": "SS-P2-AUDIO-007",
+      "summary": "Bluetooth Turntable for practical, everyday use in the audio collection.",
+      "description": "Bluetooth Turntable is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 28900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/bluetooth-turntable.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Wireless Headphone Stand",
+      "slug": "wireless-headphone-stand",
+      "sku": "SS-P2-AUDIO-008",
+      "summary": "Wireless Headphone Stand for practical, everyday use in the audio collection.",
+      "description": "Wireless Headphone Stand is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/wireless-headphone-stand.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stereo RCA Audio Cable",
+      "slug": "stereo-rca-audio-cable",
+      "sku": "SS-P2-AUDIO-009",
+      "summary": "Stereo RCA Audio Cable for practical, everyday use in the audio collection.",
+      "description": "Stereo RCA Audio Cable is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/stereo-rca-audio-cable.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Portable DAC Headphone Amp",
+      "slug": "portable-dac-headphone-amp",
+      "sku": "SS-P2-AUDIO-010",
+      "summary": "Portable DAC Headphone Amp for practical, everyday use in the audio collection.",
+      "description": "Portable DAC Headphone Amp is a straightforward audio item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "audio",
+        "phase-2-draft"
+      ],
+      "priceInCents": 9900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "audio",
+      "images": [
+        "/products/phase2/portable-dac-headphone-amp.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Clamp-On Desk Lamp",
+      "slug": "clamp-on-desk-lamp",
+      "sku": "SS-P2-WORKSPAC-001",
+      "summary": "Clamp-On Desk Lamp for practical, everyday use in the workspace collection.",
+      "description": "Clamp-On Desk Lamp is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/clamp-on-desk-lamp.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Aluminum Laptop Riser",
+      "slug": "aluminum-laptop-riser",
+      "sku": "SS-P2-WORKSPAC-002",
+      "summary": "Aluminum Laptop Riser for practical, everyday use in the workspace collection.",
+      "description": "Aluminum Laptop Riser is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/aluminum-laptop-riser.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Compact Mechanical Keyboard",
+      "slug": "compact-mechanical-keyboard",
+      "sku": "SS-P2-WORKSPAC-003",
+      "summary": "Compact Mechanical Keyboard for practical, everyday use in the workspace collection.",
+      "description": "Compact Mechanical Keyboard is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 8900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/compact-mechanical-keyboard.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Vertical Wireless Mouse",
+      "slug": "vertical-wireless-mouse",
+      "sku": "SS-P2-WORKSPAC-004",
+      "summary": "Vertical Wireless Mouse for practical, everyday use in the workspace collection.",
+      "description": "Vertical Wireless Mouse is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/vertical-wireless-mouse.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "A4 Desk Pad",
+      "slug": "a4-desk-pad",
+      "sku": "SS-P2-WORKSPAC-005",
+      "summary": "A4 Desk Pad for practical, everyday use in the workspace collection.",
+      "description": "A4 Desk Pad is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/a4-desk-pad.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Adjustable Monitor Shelf",
+      "slug": "adjustable-monitor-shelf",
+      "sku": "SS-P2-WORKSPAC-006",
+      "summary": "Adjustable Monitor Shelf for practical, everyday use in the workspace collection.",
+      "description": "Adjustable Monitor Shelf is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/adjustable-monitor-shelf.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "USB-C Desk Hub",
+      "slug": "usb-c-desk-hub",
+      "sku": "SS-P2-WORKSPAC-007",
+      "summary": "USB-C Desk Hub for practical, everyday use in the workspace collection.",
+      "description": "USB-C Desk Hub is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/usb-c-desk-hub.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stackable Document Tray",
+      "slug": "stackable-document-tray",
+      "sku": "SS-P2-WORKSPAC-008",
+      "summary": "Stackable Document Tray for practical, everyday use in the workspace collection.",
+      "description": "Stackable Document Tray is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/stackable-document-tray.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Task Chair Lumbar Cushion",
+      "slug": "task-chair-lumbar-cushion",
+      "sku": "SS-P2-WORKSPAC-009",
+      "summary": "Task Chair Lumbar Cushion for practical, everyday use in the workspace collection.",
+      "description": "Task Chair Lumbar Cushion is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/task-chair-lumbar-cushion.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cable Management Box",
+      "slug": "cable-management-box",
+      "sku": "SS-P2-WORKSPAC-010",
+      "summary": "Cable Management Box for practical, everyday use in the workspace collection.",
+      "description": "Cable Management Box is a straightforward workspace item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "workspace",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "workspace",
+      "images": [
+        "/products/phase2/cable-management-box.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cotton Waffle Throw",
+      "slug": "cotton-waffle-throw",
+      "sku": "SS-P2-HOME-001",
+      "summary": "Cotton Waffle Throw for practical, everyday use in the home collection.",
+      "description": "Cotton Waffle Throw is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/cotton-waffle-throw.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stoneware Table Lamp",
+      "slug": "stoneware-table-lamp",
+      "sku": "SS-P2-HOME-002",
+      "summary": "Stoneware Table Lamp for practical, everyday use in the home collection.",
+      "description": "Stoneware Table Lamp is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 9900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/stoneware-table-lamp.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Linen Cushion Cover Set",
+      "slug": "linen-cushion-cover-set",
+      "sku": "SS-P2-HOME-003",
+      "summary": "Linen Cushion Cover Set for practical, everyday use in the home collection.",
+      "description": "Linen Cushion Cover Set is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/linen-cushion-cover-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Acacia Entryway Tray",
+      "slug": "acacia-entryway-tray",
+      "sku": "SS-P2-HOME-004",
+      "summary": "Acacia Entryway Tray for practical, everyday use in the home collection.",
+      "description": "Acacia Entryway Tray is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/acacia-entryway-tray.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Ceramic Bud Vase Pair",
+      "slug": "ceramic-bud-vase-pair",
+      "sku": "SS-P2-HOME-005",
+      "summary": "Ceramic Bud Vase Pair for practical, everyday use in the home collection.",
+      "description": "Ceramic Bud Vase Pair is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/ceramic-bud-vase-pair.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cotton Bath Towel Set",
+      "slug": "cotton-bath-towel-set",
+      "sku": "SS-P2-HOME-006",
+      "summary": "Cotton Bath Towel Set for practical, everyday use in the home collection.",
+      "description": "Cotton Bath Towel Set is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/cotton-bath-towel-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Woven Storage Basket",
+      "slug": "woven-storage-basket",
+      "sku": "SS-P2-HOME-007",
+      "summary": "Woven Storage Basket for practical, everyday use in the home collection.",
+      "description": "Woven Storage Basket is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/woven-storage-basket.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Wall-Mounted Key Rail",
+      "slug": "wall-mounted-key-rail",
+      "sku": "SS-P2-HOME-008",
+      "summary": "Wall-Mounted Key Rail for practical, everyday use in the home collection.",
+      "description": "Wall-Mounted Key Rail is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/wall-mounted-key-rail.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Glass Bedside Carafe",
+      "slug": "glass-bedside-carafe",
+      "sku": "SS-P2-HOME-009",
+      "summary": "Glass Bedside Carafe for practical, everyday use in the home collection.",
+      "description": "Glass Bedside Carafe is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/glass-bedside-carafe.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Felt Drawer Organizer Set",
+      "slug": "felt-drawer-organizer-set",
+      "sku": "SS-P2-HOME-010",
+      "summary": "Felt Drawer Organizer Set for practical, everyday use in the home collection.",
+      "description": "Felt Drawer Organizer Set is a straightforward home item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "home",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "home",
+      "images": [
+        "/products/phase2/felt-drawer-organizer-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Canvas Travel Weekender",
+      "slug": "canvas-travel-weekender",
+      "sku": "SS-P2-ACCESSOR-001",
+      "summary": "Canvas Travel Weekender for practical, everyday use in the accessories collection.",
+      "description": "Canvas Travel Weekender is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 7900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/canvas-travel-weekender.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Slim Card Wallet",
+      "slug": "slim-card-wallet",
+      "sku": "SS-P2-ACCESSOR-002",
+      "summary": "Slim Card Wallet for practical, everyday use in the accessories collection.",
+      "description": "Slim Card Wallet is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/slim-card-wallet.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Braided Leather Key Loop",
+      "slug": "braided-leather-key-loop",
+      "sku": "SS-P2-ACCESSOR-003",
+      "summary": "Braided Leather Key Loop for practical, everyday use in the accessories collection.",
+      "description": "Braided Leather Key Loop is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/braided-leather-key-loop.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Travel Toiletry Organizer",
+      "slug": "travel-toiletry-organizer",
+      "sku": "SS-P2-ACCESSOR-004",
+      "summary": "Travel Toiletry Organizer for practical, everyday use in the accessories collection.",
+      "description": "Travel Toiletry Organizer is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/travel-toiletry-organizer.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Recycled Nylon Sling Bag",
+      "slug": "recycled-nylon-sling-bag",
+      "sku": "SS-P2-ACCESSOR-005",
+      "summary": "Recycled Nylon Sling Bag for practical, everyday use in the accessories collection.",
+      "description": "Recycled Nylon Sling Bag is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/recycled-nylon-sling-bag.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Analog Field Watch",
+      "slug": "analog-field-watch",
+      "sku": "SS-P2-ACCESSOR-006",
+      "summary": "Analog Field Watch for practical, everyday use in the accessories collection.",
+      "description": "Analog Field Watch is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 11900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/analog-field-watch.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Passport and Card Holder",
+      "slug": "passport-and-card-holder",
+      "sku": "SS-P2-ACCESSOR-007",
+      "summary": "Passport and Card Holder for practical, everyday use in the accessories collection.",
+      "description": "Passport and Card Holder is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2700,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/passport-and-card-holder.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Compact Folding Umbrella",
+      "slug": "compact-folding-umbrella",
+      "sku": "SS-P2-ACCESSOR-008",
+      "summary": "Compact Folding Umbrella for practical, everyday use in the accessories collection.",
+      "description": "Compact Folding Umbrella is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/compact-folding-umbrella.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Everyday Belt",
+      "slug": "everyday-belt",
+      "sku": "SS-P2-ACCESSOR-009",
+      "summary": "Everyday Belt for practical, everyday use in the accessories collection.",
+      "description": "Everyday Belt is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/everyday-belt.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Packing Cube Set",
+      "slug": "packing-cube-set",
+      "sku": "SS-P2-ACCESSOR-010",
+      "summary": "Packing Cube Set for practical, everyday use in the accessories collection.",
+      "description": "Packing Cube Set is a straightforward accessories item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "accessories",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3300,
+      "compareAtPriceInCents": null,
+      "categorySlug": "accessories",
+      "images": [
+        "/products/phase2/packing-cube-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Insulated Trail Flask",
+      "slug": "insulated-trail-flask",
+      "sku": "SS-P2-OUTDOOR-001",
+      "summary": "Insulated Trail Flask for practical, everyday use in the outdoor collection.",
+      "description": "Insulated Trail Flask is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/insulated-trail-flask.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Compact Folding Camp Stool",
+      "slug": "compact-folding-camp-stool",
+      "sku": "SS-P2-OUTDOOR-002",
+      "summary": "Compact Folding Camp Stool for practical, everyday use in the outdoor collection.",
+      "description": "Compact Folding Camp Stool is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/compact-folding-camp-stool.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Rechargeable Headlamp",
+      "slug": "rechargeable-headlamp",
+      "sku": "SS-P2-OUTDOOR-003",
+      "summary": "Rechargeable Headlamp for practical, everyday use in the outdoor collection.",
+      "description": "Rechargeable Headlamp is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/rechargeable-headlamp.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Waterproof Dry Bag",
+      "slug": "waterproof-dry-bag",
+      "sku": "SS-P2-OUTDOOR-004",
+      "summary": "Waterproof Dry Bag for practical, everyday use in the outdoor collection.",
+      "description": "Waterproof Dry Bag is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/waterproof-dry-bag.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Lightweight Picnic Blanket",
+      "slug": "lightweight-picnic-blanket",
+      "sku": "SS-P2-OUTDOOR-005",
+      "summary": "Lightweight Picnic Blanket for practical, everyday use in the outdoor collection.",
+      "description": "Lightweight Picnic Blanket is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4300,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/lightweight-picnic-blanket.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stainless Camp Cook Set",
+      "slug": "stainless-camp-cook-set",
+      "sku": "SS-P2-OUTDOOR-006",
+      "summary": "Stainless Camp Cook Set for practical, everyday use in the outdoor collection.",
+      "description": "Stainless Camp Cook Set is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/stainless-camp-cook-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Trail First-Aid Pouch",
+      "slug": "trail-first-aid-pouch",
+      "sku": "SS-P2-OUTDOOR-007",
+      "summary": "Trail First-Aid Pouch for practical, everyday use in the outdoor collection.",
+      "description": "Trail First-Aid Pouch is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/trail-first-aid-pouch.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Foldable Trekking Poles",
+      "slug": "foldable-trekking-poles",
+      "sku": "SS-P2-OUTDOOR-008",
+      "summary": "Foldable Trekking Poles for practical, everyday use in the outdoor collection.",
+      "description": "Foldable Trekking Poles is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 7400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/foldable-trekking-poles.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Packable Rain Shell",
+      "slug": "packable-rain-shell",
+      "sku": "SS-P2-OUTDOOR-009",
+      "summary": "Packable Rain Shell for practical, everyday use in the outdoor collection.",
+      "description": "Packable Rain Shell is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 8900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/packable-rain-shell.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Clip-On Solar Lantern",
+      "slug": "clip-on-solar-lantern",
+      "sku": "SS-P2-OUTDOOR-010",
+      "summary": "Clip-On Solar Lantern for practical, everyday use in the outdoor collection.",
+      "description": "Clip-On Solar Lantern is a straightforward outdoor item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "outdoor",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "outdoor",
+      "images": [
+        "/products/phase2/clip-on-solar-lantern.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cork Yoga Block Pair",
+      "slug": "cork-yoga-block-pair",
+      "sku": "SS-P2-WELLNESS-001",
+      "summary": "Cork Yoga Block Pair for practical, everyday use in the wellness collection.",
+      "description": "Cork Yoga Block Pair is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/cork-yoga-block-pair.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Aromatherapy Oil Diffuser",
+      "slug": "aromatherapy-oil-diffuser",
+      "sku": "SS-P2-WELLNESS-002",
+      "summary": "Aromatherapy Oil Diffuser for practical, everyday use in the wellness collection.",
+      "description": "Aromatherapy Oil Diffuser is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/aromatherapy-oil-diffuser.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Weighted Eye Pillow",
+      "slug": "weighted-eye-pillow",
+      "sku": "SS-P2-WELLNESS-003",
+      "summary": "Weighted Eye Pillow for practical, everyday use in the wellness collection.",
+      "description": "Weighted Eye Pillow is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/weighted-eye-pillow.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cotton Meditation Cushion",
+      "slug": "cotton-meditation-cushion",
+      "sku": "SS-P2-WELLNESS-004",
+      "summary": "Cotton Meditation Cushion for practical, everyday use in the wellness collection.",
+      "description": "Cotton Meditation Cushion is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/cotton-meditation-cushion.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stainless Gua Sha Tool",
+      "slug": "stainless-gua-sha-tool",
+      "sku": "SS-P2-WELLNESS-005",
+      "summary": "Stainless Gua Sha Tool for practical, everyday use in the wellness collection.",
+      "description": "Stainless Gua Sha Tool is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/stainless-gua-sha-tool.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Rechargeable Sleep Sound Machine",
+      "slug": "rechargeable-sleep-sound-machine",
+      "sku": "SS-P2-WELLNESS-006",
+      "summary": "Rechargeable Sleep Sound Machine for practical, everyday use in the wellness collection.",
+      "description": "Rechargeable Sleep Sound Machine is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/rechargeable-sleep-sound-machine.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Natural Bristle Body Brush",
+      "slug": "natural-bristle-body-brush",
+      "sku": "SS-P2-WELLNESS-007",
+      "summary": "Natural Bristle Body Brush for practical, everyday use in the wellness collection.",
+      "description": "Natural Bristle Body Brush is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1700,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/natural-bristle-body-brush.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stretching Strap",
+      "slug": "stretching-strap",
+      "sku": "SS-P2-WELLNESS-008",
+      "summary": "Stretching Strap for practical, everyday use in the wellness collection.",
+      "description": "Stretching Strap is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/stretching-strap.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Ceramic Essential Oil Burner",
+      "slug": "ceramic-essential-oil-burner",
+      "sku": "SS-P2-WELLNESS-009",
+      "summary": "Ceramic Essential Oil Burner for practical, everyday use in the wellness collection.",
+      "description": "Ceramic Essential Oil Burner is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3300,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/ceramic-essential-oil-burner.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Warm Light Reading Lamp",
+      "slug": "warm-light-reading-lamp",
+      "sku": "SS-P2-WELLNESS-010",
+      "summary": "Warm Light Reading Lamp for practical, everyday use in the wellness collection.",
+      "description": "Warm Light Reading Lamp is a straightforward wellness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "wellness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4700,
+      "compareAtPriceInCents": null,
+      "categorySlug": "wellness",
+      "images": [
+        "/products/phase2/warm-light-reading-lamp.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Dual-Port USB-C Wall Charger",
+      "slug": "dual-port-usb-c-wall-charger",
+      "sku": "SS-P2-ELECTRON-001",
+      "summary": "Dual-Port USB-C Wall Charger for practical, everyday use in the electronics collection.",
+      "description": "Dual-Port USB-C Wall Charger is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/dual-port-usb-c-wall-charger.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Compact 4K Webcam",
+      "slug": "compact-4k-webcam",
+      "sku": "SS-P2-ELECTRON-002",
+      "summary": "Compact 4K Webcam for practical, everyday use in the electronics collection.",
+      "description": "Compact 4K Webcam is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 8900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/compact-4k-webcam.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Portable SSD Enclosure",
+      "slug": "portable-ssd-enclosure",
+      "sku": "SS-P2-ELECTRON-003",
+      "summary": "Portable SSD Enclosure for practical, everyday use in the electronics collection.",
+      "description": "Portable SSD Enclosure is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/portable-ssd-enclosure.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Wi-Fi Smart Plug Pair",
+      "slug": "wi-fi-smart-plug-pair",
+      "sku": "SS-P2-ELECTRON-004",
+      "summary": "Wi-Fi Smart Plug Pair for practical, everyday use in the electronics collection.",
+      "description": "Wi-Fi Smart Plug Pair is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/wi-fi-smart-plug-pair.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Wireless Charging Pad",
+      "slug": "wireless-charging-pad",
+      "sku": "SS-P2-ELECTRON-005",
+      "summary": "Wireless Charging Pad for practical, everyday use in the electronics collection.",
+      "description": "Wireless Charging Pad is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/wireless-charging-pad.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "HDMI Capture Adapter",
+      "slug": "hdmi-capture-adapter",
+      "sku": "SS-P2-ELECTRON-006",
+      "summary": "HDMI Capture Adapter for practical, everyday use in the electronics collection.",
+      "description": "HDMI Capture Adapter is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/hdmi-capture-adapter.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "USB-C to Ethernet Adapter",
+      "slug": "usb-c-to-ethernet-adapter",
+      "sku": "SS-P2-ELECTRON-007",
+      "summary": "USB-C to Ethernet Adapter for practical, everyday use in the electronics collection.",
+      "description": "USB-C to Ethernet Adapter is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/usb-c-to-ethernet-adapter.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Rechargeable Motion Sensor Light",
+      "slug": "rechargeable-motion-sensor-light",
+      "sku": "SS-P2-ELECTRON-008",
+      "summary": "Rechargeable Motion Sensor Light for practical, everyday use in the electronics collection.",
+      "description": "Rechargeable Motion Sensor Light is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/rechargeable-motion-sensor-light.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Portable Mini Projector",
+      "slug": "portable-mini-projector",
+      "sku": "SS-P2-ELECTRON-009",
+      "summary": "Portable Mini Projector for practical, everyday use in the electronics collection.",
+      "description": "Portable Mini Projector is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 32900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/portable-mini-projector.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Bluetooth Trackpad",
+      "slug": "bluetooth-trackpad",
+      "sku": "SS-P2-ELECTRON-010",
+      "summary": "Bluetooth Trackpad for practical, everyday use in the electronics collection.",
+      "description": "Bluetooth Trackpad is a straightforward electronics item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "electronics",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "electronics",
+      "images": [
+        "/products/phase2/bluetooth-trackpad.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Relaxed Cotton Oxford Shirt",
+      "slug": "relaxed-cotton-oxford-shirt",
+      "sku": "SS-P2-FASHION-001",
+      "summary": "Relaxed Cotton Oxford Shirt for practical, everyday use in the fashion collection.",
+      "description": "Relaxed Cotton Oxford Shirt is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/relaxed-cotton-oxford-shirt.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Merino Crewneck Sweater",
+      "slug": "merino-crewneck-sweater",
+      "sku": "SS-P2-FASHION-002",
+      "summary": "Merino Crewneck Sweater for practical, everyday use in the fashion collection.",
+      "description": "Merino Crewneck Sweater is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 10900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/merino-crewneck-sweater.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Linen Blend Wide-Leg Trousers",
+      "slug": "linen-blend-wide-leg-trousers",
+      "sku": "SS-P2-FASHION-003",
+      "summary": "Linen Blend Wide-Leg Trousers for practical, everyday use in the fashion collection.",
+      "description": "Linen Blend Wide-Leg Trousers is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 7900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/linen-blend-wide-leg-trousers.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cotton Poplin Overshirt",
+      "slug": "cotton-poplin-overshirt",
+      "sku": "SS-P2-FASHION-004",
+      "summary": "Cotton Poplin Overshirt for practical, everyday use in the fashion collection.",
+      "description": "Cotton Poplin Overshirt is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/cotton-poplin-overshirt.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Ribbed Knit Beanie",
+      "slug": "ribbed-knit-beanie",
+      "sku": "SS-P2-FASHION-005",
+      "summary": "Ribbed Knit Beanie for practical, everyday use in the fashion collection.",
+      "description": "Ribbed Knit Beanie is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/ribbed-knit-beanie.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Everyday Canvas Apron",
+      "slug": "everyday-canvas-apron",
+      "sku": "SS-P2-FASHION-006",
+      "summary": "Everyday Canvas Apron for practical, everyday use in the fashion collection.",
+      "description": "Everyday Canvas Apron is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/everyday-canvas-apron.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Lightweight Quilted Vest",
+      "slug": "lightweight-quilted-vest",
+      "sku": "SS-P2-FASHION-007",
+      "summary": "Lightweight Quilted Vest for practical, everyday use in the fashion collection.",
+      "description": "Lightweight Quilted Vest is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 9900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/lightweight-quilted-vest.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Textured Cotton Polo",
+      "slug": "textured-cotton-polo",
+      "sku": "SS-P2-FASHION-008",
+      "summary": "Textured Cotton Polo for practical, everyday use in the fashion collection.",
+      "description": "Textured Cotton Polo is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/textured-cotton-polo.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Packable Travel Scarf",
+      "slug": "packable-travel-scarf",
+      "sku": "SS-P2-FASHION-009",
+      "summary": "Packable Travel Scarf for practical, everyday use in the fashion collection.",
+      "description": "Packable Travel Scarf is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/packable-travel-scarf.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Relaxed Jersey Lounge Set",
+      "slug": "relaxed-jersey-lounge-set",
+      "sku": "SS-P2-FASHION-010",
+      "summary": "Relaxed Jersey Lounge Set for practical, everyday use in the fashion collection.",
+      "description": "Relaxed Jersey Lounge Set is a straightforward fashion item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "fashion",
+        "phase-2-draft"
+      ],
+      "priceInCents": 8500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "fashion",
+      "images": [
+        "/products/phase2/relaxed-jersey-lounge-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Canvas Low-Top Sneakers",
+      "slug": "canvas-low-top-sneakers",
+      "sku": "SS-P2-FOOTWEAR-001",
+      "summary": "Canvas Low-Top Sneakers for practical, everyday use in the footwear collection.",
+      "description": "Canvas Low-Top Sneakers is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/canvas-low-top-sneakers.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Leather Walking Loafers",
+      "slug": "leather-walking-loafers",
+      "sku": "SS-P2-FOOTWEAR-002",
+      "summary": "Leather Walking Loafers for practical, everyday use in the footwear collection.",
+      "description": "Leather Walking Loafers is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 11900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/leather-walking-loafers.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Trail Running Shoes",
+      "slug": "trail-running-shoes",
+      "sku": "SS-P2-FOOTWEAR-003",
+      "summary": "Trail Running Shoes for practical, everyday use in the footwear collection.",
+      "description": "Trail Running Shoes is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 13900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/trail-running-shoes.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Everyday Slide Sandals",
+      "slug": "everyday-slide-sandals",
+      "sku": "SS-P2-FOOTWEAR-004",
+      "summary": "Everyday Slide Sandals for practical, everyday use in the footwear collection.",
+      "description": "Everyday Slide Sandals is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/everyday-slide-sandals.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Waterproof Hiking Boots",
+      "slug": "waterproof-hiking-boots",
+      "sku": "SS-P2-FOOTWEAR-005",
+      "summary": "Waterproof Hiking Boots for practical, everyday use in the footwear collection.",
+      "description": "Waterproof Hiking Boots is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 16900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/waterproof-hiking-boots.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Knit House Slippers",
+      "slug": "knit-house-slippers",
+      "sku": "SS-P2-FOOTWEAR-006",
+      "summary": "Knit House Slippers for practical, everyday use in the footwear collection.",
+      "description": "Knit House Slippers is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/knit-house-slippers.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Minimal Court Sneakers",
+      "slug": "minimal-court-sneakers",
+      "sku": "SS-P2-FOOTWEAR-007",
+      "summary": "Minimal Court Sneakers for practical, everyday use in the footwear collection.",
+      "description": "Minimal Court Sneakers is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 7900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/minimal-court-sneakers.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cushioned Running Socks, 3-Pack",
+      "slug": "cushioned-running-socks-3-pack",
+      "sku": "SS-P2-FOOTWEAR-008",
+      "summary": "Cushioned Running Socks, 3-Pack for practical, everyday use in the footwear collection.",
+      "description": "Cushioned Running Socks, 3-Pack is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/cushioned-running-socks-3-pack.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Leather Ankle Boots",
+      "slug": "leather-ankle-boots",
+      "sku": "SS-P2-FOOTWEAR-009",
+      "summary": "Leather Ankle Boots for practical, everyday use in the footwear collection.",
+      "description": "Leather Ankle Boots is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 14900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/leather-ankle-boots.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Adjustable Sport Sandals",
+      "slug": "adjustable-sport-sandals",
+      "sku": "SS-P2-FOOTWEAR-010",
+      "summary": "Adjustable Sport Sandals for practical, everyday use in the footwear collection.",
+      "description": "Adjustable Sport Sandals is a straightforward footwear item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "footwear",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "footwear",
+      "images": [
+        "/products/phase2/adjustable-sport-sandals.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stainless Steel Saucepan",
+      "slug": "stainless-steel-saucepan",
+      "sku": "SS-P2-KITCHEND-001",
+      "summary": "Stainless Steel Saucepan for practical, everyday use in the kitchen & dining collection.",
+      "description": "Stainless Steel Saucepan is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 7900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/stainless-steel-saucepan.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Acacia Serving Board",
+      "slug": "acacia-serving-board",
+      "sku": "SS-P2-KITCHEND-002",
+      "summary": "Acacia Serving Board for practical, everyday use in the kitchen & dining collection.",
+      "description": "Acacia Serving Board is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/acacia-serving-board.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Glass Food Storage Set",
+      "slug": "glass-food-storage-set",
+      "sku": "SS-P2-KITCHEND-003",
+      "summary": "Glass Food Storage Set for practical, everyday use in the kitchen & dining collection.",
+      "description": "Glass Food Storage Set is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/glass-food-storage-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Manual Burr Coffee Grinder",
+      "slug": "manual-burr-coffee-grinder",
+      "sku": "SS-P2-KITCHEND-004",
+      "summary": "Manual Burr Coffee Grinder for practical, everyday use in the kitchen & dining collection.",
+      "description": "Manual Burr Coffee Grinder is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 8900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/manual-burr-coffee-grinder.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stoneware Dinner Plate Set",
+      "slug": "stoneware-dinner-plate-set",
+      "sku": "SS-P2-KITCHEND-005",
+      "summary": "Stoneware Dinner Plate Set for practical, everyday use in the kitchen & dining collection.",
+      "description": "Stoneware Dinner Plate Set is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/stoneware-dinner-plate-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Digital Kitchen Scale",
+      "slug": "digital-kitchen-scale",
+      "sku": "SS-P2-KITCHEND-006",
+      "summary": "Digital Kitchen Scale for practical, everyday use in the kitchen & dining collection.",
+      "description": "Digital Kitchen Scale is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/digital-kitchen-scale.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Silicone Baking Mat Pair",
+      "slug": "silicone-baking-mat-pair",
+      "sku": "SS-P2-KITCHEND-007",
+      "summary": "Silicone Baking Mat Pair for practical, everyday use in the kitchen & dining collection.",
+      "description": "Silicone Baking Mat Pair is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1700,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/silicone-baking-mat-pair.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Enamel Pour-Over Kettle",
+      "slug": "enamel-pour-over-kettle",
+      "sku": "SS-P2-KITCHEND-008",
+      "summary": "Enamel Pour-Over Kettle for practical, everyday use in the kitchen & dining collection.",
+      "description": "Enamel Pour-Over Kettle is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 6400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/enamel-pour-over-kettle.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cotton Kitchen Towel Set",
+      "slug": "cotton-kitchen-towel-set",
+      "sku": "SS-P2-KITCHEND-009",
+      "summary": "Cotton Kitchen Towel Set for practical, everyday use in the kitchen & dining collection.",
+      "description": "Cotton Kitchen Towel Set is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/cotton-kitchen-towel-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stackable Spice Jar Set",
+      "slug": "stackable-spice-jar-set",
+      "sku": "SS-P2-KITCHEND-010",
+      "summary": "Stackable Spice Jar Set for practical, everyday use in the kitchen & dining collection.",
+      "description": "Stackable Spice Jar Set is a straightforward kitchen & dining item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "kitchen-dining",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "kitchen-dining",
+      "images": [
+        "/products/phase2/stackable-spice-jar-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Gentle Facial Cleansing Brush",
+      "slug": "gentle-facial-cleansing-brush",
+      "sku": "SS-P2-BEAUTYPE-001",
+      "summary": "Gentle Facial Cleansing Brush for practical, everyday use in the beauty & personal care collection.",
+      "description": "Gentle Facial Cleansing Brush is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/gentle-facial-cleansing-brush.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Reusable Makeup Pad Set",
+      "slug": "reusable-makeup-pad-set",
+      "sku": "SS-P2-BEAUTYPE-002",
+      "summary": "Reusable Makeup Pad Set for practical, everyday use in the beauty & personal care collection.",
+      "description": "Reusable Makeup Pad Set is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/reusable-makeup-pad-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Wide-Tooth Acetate Comb",
+      "slug": "wide-tooth-acetate-comb",
+      "sku": "SS-P2-BEAUTYPE-003",
+      "summary": "Wide-Tooth Acetate Comb for practical, everyday use in the beauty & personal care collection.",
+      "description": "Wide-Tooth Acetate Comb is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/wide-tooth-acetate-comb.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Travel Skincare Bottle Kit",
+      "slug": "travel-skincare-bottle-kit",
+      "sku": "SS-P2-BEAUTYPE-004",
+      "summary": "Travel Skincare Bottle Kit for practical, everyday use in the beauty & personal care collection.",
+      "description": "Travel Skincare Bottle Kit is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/travel-skincare-bottle-kit.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Soft Cotton Face Cloth Set",
+      "slug": "soft-cotton-face-cloth-set",
+      "sku": "SS-P2-BEAUTYPE-005",
+      "summary": "Soft Cotton Face Cloth Set for practical, everyday use in the beauty & personal care collection.",
+      "description": "Soft Cotton Face Cloth Set is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1700,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/soft-cotton-face-cloth-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Rechargeable Facial Massager",
+      "slug": "rechargeable-facial-massager",
+      "sku": "SS-P2-BEAUTYPE-006",
+      "summary": "Rechargeable Facial Massager for practical, everyday use in the beauty & personal care collection.",
+      "description": "Rechargeable Facial Massager is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/rechargeable-facial-massager.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Bamboo Hair Brush",
+      "slug": "bamboo-hair-brush",
+      "sku": "SS-P2-BEAUTYPE-007",
+      "summary": "Bamboo Hair Brush for practical, everyday use in the beauty & personal care collection.",
+      "description": "Bamboo Hair Brush is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/bamboo-hair-brush.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Insulated Cosmetic Bag",
+      "slug": "insulated-cosmetic-bag",
+      "sku": "SS-P2-BEAUTYPE-008",
+      "summary": "Insulated Cosmetic Bag for practical, everyday use in the beauty & personal care collection.",
+      "description": "Insulated Cosmetic Bag is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/insulated-cosmetic-bag.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Stainless Manicure Tool Set",
+      "slug": "stainless-manicure-tool-set",
+      "sku": "SS-P2-BEAUTYPE-009",
+      "summary": "Stainless Manicure Tool Set for practical, everyday use in the beauty & personal care collection.",
+      "description": "Stainless Manicure Tool Set is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/stainless-manicure-tool-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Padded Cotton Eye Mask",
+      "slug": "padded-cotton-eye-mask",
+      "sku": "SS-P2-BEAUTYPE-010",
+      "summary": "Padded Cotton Eye Mask for practical, everyday use in the beauty & personal care collection.",
+      "description": "Padded Cotton Eye Mask is a straightforward beauty & personal care item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "beauty-personal-care",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "beauty-personal-care",
+      "images": [
+        "/products/phase2/padded-cotton-eye-mask.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Compact Dumbbell Set",
+      "slug": "compact-dumbbell-set",
+      "sku": "SS-P2-SPORTSFI-001",
+      "summary": "Compact Dumbbell Set for practical, everyday use in the sports & fitness collection.",
+      "description": "Compact Dumbbell Set is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 12900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/compact-dumbbell-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Resistance Band Set",
+      "slug": "resistance-band-set",
+      "sku": "SS-P2-SPORTSFI-002",
+      "summary": "Resistance Band Set for practical, everyday use in the sports & fitness collection.",
+      "description": "Resistance Band Set is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/resistance-band-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Balance Training Board",
+      "slug": "balance-training-board",
+      "sku": "SS-P2-SPORTSFI-003",
+      "summary": "Balance Training Board for practical, everyday use in the sports & fitness collection.",
+      "description": "Balance Training Board is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/balance-training-board.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Jump Rope with Bearing Handles",
+      "slug": "jump-rope-with-bearing-handles",
+      "sku": "SS-P2-SPORTSFI-004",
+      "summary": "Jump Rope with Bearing Handles for practical, everyday use in the sports & fitness collection.",
+      "description": "Jump Rope with Bearing Handles is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/jump-rope-with-bearing-handles.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Textured Recovery Roller",
+      "slug": "textured-recovery-roller",
+      "sku": "SS-P2-SPORTSFI-005",
+      "summary": "Textured Recovery Roller for practical, everyday use in the sports & fitness collection.",
+      "description": "Textured Recovery Roller is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/textured-recovery-roller.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Adjustable Kettlebell",
+      "slug": "adjustable-kettlebell",
+      "sku": "SS-P2-SPORTSFI-006",
+      "summary": "Adjustable Kettlebell for practical, everyday use in the sports & fitness collection.",
+      "description": "Adjustable Kettlebell is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 15900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/adjustable-kettlebell.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Running Waist Pack",
+      "slug": "running-waist-pack",
+      "sku": "SS-P2-SPORTSFI-007",
+      "summary": "Running Waist Pack for practical, everyday use in the sports & fitness collection.",
+      "description": "Running Waist Pack is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/running-waist-pack.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Foldable Exercise Mat",
+      "slug": "foldable-exercise-mat",
+      "sku": "SS-P2-SPORTSFI-008",
+      "summary": "Foldable Exercise Mat for practical, everyday use in the sports & fitness collection.",
+      "description": "Foldable Exercise Mat is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/foldable-exercise-mat.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Doorway Pull-Up Bar",
+      "slug": "doorway-pull-up-bar",
+      "sku": "SS-P2-SPORTSFI-009",
+      "summary": "Doorway Pull-Up Bar for practical, everyday use in the sports & fitness collection.",
+      "description": "Doorway Pull-Up Bar is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/doorway-pull-up-bar.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cycling Repair Kit",
+      "slug": "cycling-repair-kit",
+      "sku": "SS-P2-SPORTSFI-010",
+      "summary": "Cycling Repair Kit for practical, everyday use in the sports & fitness collection.",
+      "description": "Cycling Repair Kit is a straightforward sports & fitness item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "sports-fitness",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "sports-fitness",
+      "images": [
+        "/products/phase2/cycling-repair-kit.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Dotted Hardcover Notebook",
+      "slug": "dotted-hardcover-notebook",
+      "sku": "SS-P2-BOOKSSTA-001",
+      "summary": "Dotted Hardcover Notebook for practical, everyday use in the books & stationery collection.",
+      "description": "Dotted Hardcover Notebook is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/dotted-hardcover-notebook.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Fountain Pen Starter Set",
+      "slug": "fountain-pen-starter-set",
+      "sku": "SS-P2-BOOKSSTA-002",
+      "summary": "Fountain Pen Starter Set for practical, everyday use in the books & stationery collection.",
+      "description": "Fountain Pen Starter Set is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/fountain-pen-starter-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Undated Weekly Planner",
+      "slug": "undated-weekly-planner",
+      "sku": "SS-P2-BOOKSSTA-003",
+      "summary": "Undated Weekly Planner for practical, everyday use in the books & stationery collection.",
+      "description": "Undated Weekly Planner is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/undated-weekly-planner.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Watercolor Sketch Pad",
+      "slug": "watercolor-sketch-pad",
+      "sku": "SS-P2-BOOKSSTA-004",
+      "summary": "Watercolor Sketch Pad for practical, everyday use in the books & stationery collection.",
+      "description": "Watercolor Sketch Pad is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/watercolor-sketch-pad.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Desk Letter Tray",
+      "slug": "desk-letter-tray",
+      "sku": "SS-P2-BOOKSSTA-005",
+      "summary": "Desk Letter Tray for practical, everyday use in the books & stationery collection.",
+      "description": "Desk Letter Tray is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/desk-letter-tray.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Fine-Line Drawing Pen Set",
+      "slug": "fine-line-drawing-pen-set",
+      "sku": "SS-P2-BOOKSSTA-006",
+      "summary": "Fine-Line Drawing Pen Set for practical, everyday use in the books & stationery collection.",
+      "description": "Fine-Line Drawing Pen Set is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/fine-line-drawing-pen-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Bookbinding Journal Kit",
+      "slug": "bookbinding-journal-kit",
+      "sku": "SS-P2-BOOKSSTA-007",
+      "summary": "Bookbinding Journal Kit for practical, everyday use in the books & stationery collection.",
+      "description": "Bookbinding Journal Kit is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/bookbinding-journal-kit.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Reusable Study Flashcards",
+      "slug": "reusable-study-flashcards",
+      "sku": "SS-P2-BOOKSSTA-008",
+      "summary": "Reusable Study Flashcards for practical, everyday use in the books & stationery collection.",
+      "description": "Reusable Study Flashcards is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/reusable-study-flashcards.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Compact Reading Stand",
+      "slug": "compact-reading-stand",
+      "sku": "SS-P2-BOOKSSTA-009",
+      "summary": "Compact Reading Stand for practical, everyday use in the books & stationery collection.",
+      "description": "Compact Reading Stand is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/compact-reading-stand.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Archival Document Folder Set",
+      "slug": "archival-document-folder-set",
+      "sku": "SS-P2-BOOKSSTA-010",
+      "summary": "Archival Document Folder Set for practical, everyday use in the books & stationery collection.",
+      "description": "Archival Document Folder Set is a straightforward books & stationery item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "books-stationery",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1700,
+      "compareAtPriceInCents": null,
+      "categorySlug": "books-stationery",
+      "images": [
+        "/products/phase2/archival-document-folder-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Wooden Block Building Set",
+      "slug": "wooden-block-building-set",
+      "sku": "SS-P2-TOYSGAME-001",
+      "summary": "Wooden Block Building Set for practical, everyday use in the toys & games collection.",
+      "description": "Wooden Block Building Set is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/wooden-block-building-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cooperative Word Board Game",
+      "slug": "cooperative-word-board-game",
+      "sku": "SS-P2-TOYSGAME-002",
+      "summary": "Cooperative Word Board Game for practical, everyday use in the toys & games collection.",
+      "description": "Cooperative Word Board Game is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 4500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/cooperative-word-board-game.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "1000-Piece Botanical Puzzle",
+      "slug": "1000-piece-botanical-puzzle",
+      "sku": "SS-P2-TOYSGAME-003",
+      "summary": "1000-Piece Botanical Puzzle for practical, everyday use in the toys & games collection.",
+      "description": "1000-Piece Botanical Puzzle is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/1000-piece-botanical-puzzle.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Magnetic Drawing Board",
+      "slug": "magnetic-drawing-board",
+      "sku": "SS-P2-TOYSGAME-004",
+      "summary": "Magnetic Drawing Board for practical, everyday use in the toys & games collection.",
+      "description": "Magnetic Drawing Board is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/magnetic-drawing-board.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Wooden Marble Run Kit",
+      "slug": "wooden-marble-run-kit",
+      "sku": "SS-P2-TOYSGAME-005",
+      "summary": "Wooden Marble Run Kit for practical, everyday use in the toys & games collection.",
+      "description": "Wooden Marble Run Kit is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 5900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/wooden-marble-run-kit.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Portable Chess Set",
+      "slug": "portable-chess-set",
+      "sku": "SS-P2-TOYSGAME-006",
+      "summary": "Portable Chess Set for practical, everyday use in the toys & games collection.",
+      "description": "Portable Chess Set is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 3200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/portable-chess-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Silicone Stacking Toy",
+      "slug": "silicone-stacking-toy",
+      "sku": "SS-P2-TOYSGAME-007",
+      "summary": "Silicone Stacking Toy for practical, everyday use in the toys & games collection.",
+      "description": "Silicone Stacking Toy is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/silicone-stacking-toy.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Family Trivia Card Deck",
+      "slug": "family-trivia-card-deck",
+      "sku": "SS-P2-TOYSGAME-008",
+      "summary": "Family Trivia Card Deck for practical, everyday use in the toys & games collection.",
+      "description": "Family Trivia Card Deck is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/family-trivia-card-deck.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Beginner Origami Paper Set",
+      "slug": "beginner-origami-paper-set",
+      "sku": "SS-P2-TOYSGAME-009",
+      "summary": "Beginner Origami Paper Set for practical, everyday use in the toys & games collection.",
+      "description": "Beginner Origami Paper Set is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1300,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/beginner-origami-paper-set.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Dominoes in Storage Tin",
+      "slug": "dominoes-in-storage-tin",
+      "sku": "SS-P2-TOYSGAME-010",
+      "summary": "Dominoes in Storage Tin for practical, everyday use in the toys & games collection.",
+      "description": "Dominoes in Storage Tin is a straightforward toys & games item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "toys-games",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "toys-games",
+      "images": [
+        "/products/phase2/dominoes-in-storage-tin.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Single-Origin Ground Coffee",
+      "slug": "single-origin-ground-coffee",
+      "sku": "SS-P2-GROCERYE-001",
+      "summary": "Single-Origin Ground Coffee for practical, everyday use in the grocery & essentials collection.",
+      "description": "Single-Origin Ground Coffee is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1600,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/single-origin-ground-coffee.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Loose-Leaf Breakfast Tea Tin",
+      "slug": "loose-leaf-breakfast-tea-tin",
+      "sku": "SS-P2-GROCERYE-002",
+      "summary": "Loose-Leaf Breakfast Tea Tin for practical, everyday use in the grocery & essentials collection.",
+      "description": "Loose-Leaf Breakfast Tea Tin is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1400,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/loose-leaf-breakfast-tea-tin.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cold-Pressed Sesame Oil",
+      "slug": "cold-pressed-sesame-oil",
+      "sku": "SS-P2-GROCERYE-003",
+      "summary": "Cold-Pressed Sesame Oil for practical, everyday use in the grocery & essentials collection.",
+      "description": "Cold-Pressed Sesame Oil is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/cold-pressed-sesame-oil.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Wholegrain Rolled Oats",
+      "slug": "wholegrain-rolled-oats",
+      "sku": "SS-P2-GROCERYE-004",
+      "summary": "Wholegrain Rolled Oats for practical, everyday use in the grocery & essentials collection.",
+      "description": "Wholegrain Rolled Oats is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 900,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/wholegrain-rolled-oats.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Dried Mango Snack Pack",
+      "slug": "dried-mango-snack-pack",
+      "sku": "SS-P2-GROCERYE-005",
+      "summary": "Dried Mango Snack Pack for practical, everyday use in the grocery & essentials collection.",
+      "description": "Dried Mango Snack Pack is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1100,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/dried-mango-snack-pack.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Raw Forest Honey Jar",
+      "slug": "raw-forest-honey-jar",
+      "sku": "SS-P2-GROCERYE-006",
+      "summary": "Raw Forest Honey Jar for practical, everyday use in the grocery & essentials collection.",
+      "description": "Raw Forest Honey Jar is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1800,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/raw-forest-honey-jar.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Smoked Paprika Seasoning",
+      "slug": "smoked-paprika-seasoning",
+      "sku": "SS-P2-GROCERYE-007",
+      "summary": "Smoked Paprika Seasoning for practical, everyday use in the grocery & essentials collection.",
+      "description": "Smoked Paprika Seasoning is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 700,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/smoked-paprika-seasoning.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Dark Chocolate Baking Bar",
+      "slug": "dark-chocolate-baking-bar",
+      "sku": "SS-P2-GROCERYE-008",
+      "summary": "Dark Chocolate Baking Bar for practical, everyday use in the grocery & essentials collection.",
+      "description": "Dark Chocolate Baking Bar is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1200,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/dark-chocolate-baking-bar.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Mixed Lentil Pantry Pack",
+      "slug": "mixed-lentil-pantry-pack",
+      "sku": "SS-P2-GROCERYE-009",
+      "summary": "Mixed Lentil Pantry Pack for practical, everyday use in the grocery & essentials collection.",
+      "description": "Mixed Lentil Pantry Pack is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 1000,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/mixed-lentil-pantry-pack.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    },
+    {
+      "name": "Cold-Pressed Olive Oil",
+      "slug": "cold-pressed-olive-oil",
+      "sku": "SS-P2-GROCERYE-010",
+      "summary": "Cold-Pressed Olive Oil for practical, everyday use in the grocery & essentials collection.",
+      "description": "Cold-Pressed Olive Oil is a straightforward grocery & essentials item selected for regular home and personal use. Its design focuses on clear function, easy storage, and a simple routine. Confirm supplier specifications, materials, and local compliance before offering it for sale.",
+      "highlights": [
+        "Everyday-use design",
+        "Simple to store and maintain",
+        "Supplier specifications require confirmation"
+      ],
+      "tags": [
+        "grocery-essentials",
+        "phase-2-draft"
+      ],
+      "priceInCents": 2500,
+      "compareAtPriceInCents": null,
+      "categorySlug": "grocery-essentials",
+      "images": [
+        "/products/phase2/cold-pressed-olive-oil.svg"
+      ],
+      "stock": 0,
+      "badge": null,
+      "featured": false,
+      "active": false
+    }
+  ],
+  "artwork": {
+    "type": "generated-illustration",
+    "note": "Illustrations are placeholders, not verified product photography."
+  },
+  "productFacts": {
+    "verified": false,
+    "note": "Confirm supplier specifications, product facts, prices, and availability before activation."
+  }
+}

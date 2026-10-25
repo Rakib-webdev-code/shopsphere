@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { ProductMedia } from "@/components/product-media";
 import { StockStatusBadge } from "@/components/ui";
-import { apiRequest } from "@/lib/api-client";
+import { ApiClientError, apiRequest } from "@/lib/api-client";
 import { LOW_STOCK_THRESHOLD } from "@/lib/constants";
 import type { Product } from "@/lib/types";
 
@@ -25,14 +25,14 @@ export function InventoryManager({ products }: { products: Product[] }) {
 
   return (
     <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-surface">
-      <table className="w-full min-w-[760px] text-left text-sm">
+      <table className="w-full min-w-[980px] text-left text-sm">
         <thead className="border-b border-border bg-surface-muted text-xs uppercase tracking-wide text-muted-soft">
           <tr>
             <th className="px-4 py-3 font-semibold">Product</th>
             <th className="px-4 py-3 font-semibold">SKU</th>
             <th className="px-4 py-3 font-semibold">Status</th>
             <th className="px-4 py-3 font-semibold">Current stock</th>
-            <th className="px-4 py-3 font-semibold">Update</th>
+            <th className="px-4 py-3 font-semibold">Adjustment</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-border">
@@ -47,39 +47,79 @@ export function InventoryManager({ products }: { products: Product[] }) {
 
 function InventoryRow({ product }: { product: Product }) {
   const router = useRouter();
-  const [stock, setStock] = useState(String(product.stock));
+  const [savedStock, setSavedStock] = useState<{
+    propStock: number;
+    stock: number;
+  } | null>(null);
+  const [reason, setReason] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isConflict, setIsConflict] = useState(false);
+  // The server prop is always authoritative. The local override only bridges
+  // the gap between a successful save and the refreshed server payload.
+  const baseStock =
+    savedStock?.propStock === product.stock
+      ? savedStock.stock
+      : product.stock;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setMessage(null);
     setError(null);
+    setIsConflict(false);
     setIsSaving(true);
 
     try {
-      const quantity = Number(stock);
+      const data = new FormData(event.currentTarget);
+      const reasonText = String(data.get("reason") ?? "").trim();
+      const stockText = String(data.get("stock") ?? "").trim();
+      const nextStock = Number(stockText);
 
-      if (!Number.isSafeInteger(quantity) || quantity < 0) {
+      if (!stockText || !Number.isSafeInteger(nextStock) || nextStock < 0) {
         throw new Error("Stock must be a whole number of zero or more.");
       }
 
-      await apiRequest<{ product: Product }>(
-        `/api/admin/products/${product.id}`,
+      if (nextStock === baseStock) {
+        throw new Error("Enter a stock level different from the current value.");
+      }
+
+      if (reasonText.length < 3) {
+        throw new Error("Enter a reason of at least 3 characters.");
+      }
+
+      const result = await apiRequest<{ product: Product }>(
+        `/api/admin/products/${product.id}/stock`,
         {
-          method: "PATCH",
-          body: JSON.stringify({ stock: quantity }),
+          method: "POST",
+          body: JSON.stringify({
+            expectedStock: baseStock,
+            delta: nextStock - baseStock,
+            reason: reasonText,
+          }),
         },
       );
-      setMessage("Saved");
+
+      setSavedStock({ propStock: product.stock, stock: result.product.stock });
+      setReason("");
+      setMessage(`Saved. Stock is now ${result.product.stock}.`);
       router.refresh();
     } catch (requestError) {
-      setError(
-        requestError instanceof Error
-          ? requestError.message
-          : "Unable to update stock.",
-      );
+      if (
+        requestError instanceof ApiClientError &&
+        requestError.code === "STOCK_CONFLICT"
+      ) {
+        setIsConflict(true);
+        setError(
+          "This product's stock changed while the page was open. Refresh to load the latest value, then try again.",
+        );
+      } else {
+        setError(
+          requestError instanceof Error
+            ? requestError.message
+            : "Unable to update stock.",
+        );
+      }
     } finally {
       setIsSaving(false);
     }
@@ -122,47 +162,79 @@ function InventoryRow({ product }: { product: Product }) {
       <td className="px-4 py-3">
         <span
           className={
-            product.stock <= LOW_STOCK_THRESHOLD
+            baseStock <= LOW_STOCK_THRESHOLD
               ? "font-semibold text-warning"
               : "font-medium text-foreground"
           }
         >
-          {product.stock}
+          {baseStock}
         </span>
         <div className="mt-1">
           <StockStatusBadge
-            stock={product.stock}
+            stock={baseStock}
             threshold={LOW_STOCK_THRESHOLD}
           />
         </div>
       </td>
       <td className="px-4 py-3">
-        <form onSubmit={handleSubmit} className="flex items-center gap-2">
-          <input
-            type="number"
-            min="0"
-            step="1"
-            value={stock}
-            onChange={(event) => setStock(event.target.value)}
-            aria-label={`Stock for ${product.name}`}
-            className="w-24 rounded-xl border border-border-strong bg-surface px-3 py-2 text-sm outline-none focus:border-accent-bright focus:ring-2 focus:ring-accent-bright/20"
-          />
-          <button
-            type="submit"
-            disabled={isSaving}
-            className="rounded-full bg-strong px-3 py-2 text-xs font-semibold text-strong-foreground hover:bg-strong/90 disabled:opacity-60"
-          >
-            {isSaving ? "Saving..." : "Save"}
-          </button>
-          {message && (
-            <span role="status" className="text-xs text-accent">
-              {message}
-            </span>
-          )}
-          {error && (
-            <span role="alert" className="text-xs text-danger">
-              {error}
-            </span>
+        <form onSubmit={handleSubmit} className="space-y-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <input
+              key={baseStock}
+              type="number"
+              name="stock"
+              min="0"
+              step="1"
+              defaultValue={baseStock}
+              aria-label={`New stock for ${product.name}`}
+              className="w-24 rounded-xl border border-border-strong bg-surface px-3 py-2 text-sm outline-none focus:border-accent-bright focus:ring-2 focus:ring-accent-bright/20"
+            />
+            <input
+              type="text"
+              name="reason"
+              value={reason}
+              onChange={(event) => setReason(event.target.value)}
+              minLength={3}
+              maxLength={200}
+              required
+              placeholder="Reason (required)"
+              aria-label={`Reason for adjusting ${product.name}`}
+              className="w-44 rounded-xl border border-border-strong bg-surface px-3 py-2 text-sm outline-none focus:border-accent-bright focus:ring-2 focus:ring-accent-bright/20"
+            />
+            <button
+              type="submit"
+              disabled={isSaving}
+              className="rounded-full bg-strong px-3 py-2 text-xs font-semibold text-strong-foreground hover:bg-strong/90 disabled:opacity-60"
+            >
+              {isSaving ? "Saving..." : "Save"}
+            </button>
+          </div>
+          {(message || error) && (
+            <div className="flex flex-wrap items-center gap-2 text-xs">
+              {message && (
+                <span role="status" className="text-accent">
+                  {message}
+                </span>
+              )}
+              {error && (
+                <span role="alert" className="text-danger">
+                  {error}
+                </span>
+              )}
+              {isConflict && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsConflict(false);
+                    setError(null);
+                    router.refresh();
+                  }}
+                  className="rounded-full border border-border-strong px-2.5 py-1 font-semibold text-accent hover:bg-accent-soft"
+                >
+                  Refresh stock
+                </button>
+              )}
+            </div>
           )}
         </form>
       </td>
